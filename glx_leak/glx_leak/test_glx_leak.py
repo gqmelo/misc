@@ -44,31 +44,20 @@ xlib = cdll.LoadLibrary('libX11.so')
 xlib.XOpenDisplay.argtypes = [c_char_p]
 xlib.XOpenDisplay.restype = POINTER(struct__XDisplay)
 d = xlib.XOpenDisplay("")
-# d2 = xlib.XOpenDisplay("")
 
 # use GLX to create an OpenGL context on the same window XID
 elements = c_int()
 configs = GLX.glXChooseFBConfig(d, 0, None, byref(elements))
 print d, configs[0], c_ulong(xid), None
 w = GLX.glXCreateWindow(d, configs[0], c_ulong(xid), None)
+w2 = GLX.glXCreateWindow(d, configs[0], c_ulong(xid2), None)
 context = GLX.glXCreateNewContext(d, configs[0], GLX.GLX_RGBA_TYPE, None, True)
+context2 = GLX.glXCreateNewContext(d, configs[0], GLX.GLX_RGBA_TYPE, None, True)
+GLX.glXMakeContextCurrent(d, w2, w2, context2)
+raw_input('Press any key to draw')
 GLX.glXMakeContextCurrent(d, w, w, context)
-GLX.glXMakeCurrent(d, w, context)
 raw_input('Press any key to draw')
 draw_square(d, w)
-
-# elements2 = c_int()
-# configs2 = GLX.glXChooseFBConfig(d2, 0, None, byref(elements2))
-# print d2, configs2[0], c_ulong(xid2), None
-# w2 = GLX.glXCreateWindow(d2, configs2[0], c_ulong(xid2), None)
-# context2 = GLX.glXCreateNewContext(d2, configs2[0], GLX.GLX_RGBA_TYPE, None, True)
-# GLX.glXMakeContextCurrent(d2, w2, w2, context2)
-# draw_square(d2, w2)
-
-
-# GLX.glXMakeCurrent(d, w2, context2)
-# GLX.glXMakeCurrent(d, w2, context2)
-# GLX.glXMakeCurrent(d, w, context)
 
 # a terrible end to a terrible piece of code...
 raw_input()
