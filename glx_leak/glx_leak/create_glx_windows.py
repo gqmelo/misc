@@ -54,10 +54,10 @@ w2 = GLX.glXCreateWindow(d, configs[0], c_ulong(xid2), None)
 context = GLX.glXCreateNewContext(d, configs[0], GLX.GLX_RGBA_TYPE, None, True)
 context2 = GLX.glXCreateNewContext(d, configs[0], GLX.GLX_RGBA_TYPE, None, True)
 GLX.glXMakeContextCurrent(d, w2, w2, context2)
-raw_input('Press any key to draw')
+raw_input('Press Enter to change context')
 GLX.glXMakeContextCurrent(d, w, w, context)
-raw_input('Press any key to draw')
+raw_input('Press Enter to draw')
 draw_square(d, w)
 
 # a terrible end to a terrible piece of code...
-raw_input()
+raw_input('Press Enter to finish')
