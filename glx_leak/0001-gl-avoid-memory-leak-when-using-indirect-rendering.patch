@@ -1,0 +1,113 @@
+From 4d55dda14ae055a46dc492b6dfed7cac91040639 Mon Sep 17 00:00:00 2001
+From: Guilherme Quentel Melo <guilherme@esss.com.br>
+Date: Tue, 15 Mar 2016 19:49:32 -0300
+Subject: [[PATCH gl]] gl: avoid memory leak when using indirect rendering
+
+When multiple processes are using GL with indirect rendering a race
+condition can make drawables refcount never drop to zero.
+
+This situation could happen when there are many X clients using indirect GLX:
+
+1 - client1: calls glXMakeCurrent
+
+2 - client2: calls glXMakeCurrent
+This is the first context switch for this client. So old_context_tag=0
+
+3 - client1: calls glXRender
+For the client, its context is already current.
+For the server side lastGLContext points to client2's context.
+
+Signed-off-by: Guilherme Quentel Melo <guilherme@esss.com.br>
+Signed-off-by: Guilherme Quentel Melo <guilherme@gmail.com>
+---
+ glx/glxcmds.c | 29 +++++++++++++++++++++++++++--
+ glx/glxext.c  |  3 +++
+ 2 files changed, 30 insertions(+), 2 deletions(-)
+
+diff --git a/glx/glxcmds.c b/glx/glxcmds.c
+index f5f2bab..3a93ee4 100644
+--- a/glx/glxcmds.c
++++ b/glx/glxcmds.c
+@@ -551,12 +551,14 @@ DoMakeCurrent(__GLXclientState * cl,
+ {
+     ClientPtr client = cl->client;
+     xGLXMakeCurrentReply reply;
+-    __GLXcontext *glxc, *prevglxc;
++    __GLXcontext *glxc, *prevglxc, *lastglxc = NULL;
+     __GLXdrawable *drawPriv = NULL;
+     __GLXdrawable *readPriv = NULL;
+     int error;
+     GLuint mask;
+ 
++    LogMessageVerb(X_DEBUG, 4, "GLX: Making current\n");    
++
+     /*
+      ** If one is None and the other isn't, it's a bad match.
+      */
+@@ -642,11 +644,22 @@ DoMakeCurrent(__GLXclientState * cl,
+         if (!(*prevglxc->loseCurrent) (prevglxc)) {
+             return __glXError(GLXBadContext);
+         }
+-        lastGLContext = NULL;
+         if (!prevglxc->isDirect) {
+             prevglxc->drawPriv = NULL;
+             prevglxc->readPriv = NULL;
++            /* 
++             ** lastGLContext may be different than prevglxc, so we need to
++             ** avoid a memory leak
++            */
++            /*if (lastGLContext != NULL && lastGLContext != prevglxc) {
++               LogMessageVerb(X_DEBUG, 4, "GLX: Losing context not prevglxc\n");
++               lastglxc = (__GLXcontext*)lastGLContext;
++               if (!(*lastglxc->loseCurrent) (lastglxc)) {
++                   return __glXError(GLXBadContext);
++               }
++            }*/
+         }
++        lastGLContext = NULL;
+     }
+ 
+     if ((glxc != 0) && !glxc->isDirect) {
+@@ -654,6 +667,18 @@ DoMakeCurrent(__GLXclientState * cl,
+         glxc->drawPriv = drawPriv;
+         glxc->readPriv = readPriv;
+ 
++        /* 
++         ** It is possible that lastGLContext is still pointing to a context.
++         ** In this case we need to make it lose first to avoid a memory leak.
++        */
++        /*if (lastGLContext != NULL) {
++            LogMessageVerb(X_DEBUG, 4, "GLX: Losing context\n");
++            lastglxc = (__GLXcontext*)lastGLContext;
++            if (!(*lastglxc->loseCurrent) (lastglxc)) {
++                return __glXError(GLXBadContext);
++            }
++        }*/
++
+         /* make the context current */
+         lastGLContext = glxc;
+         if (!(*glxc->makeCurrent) (glxc)) {
+diff --git a/glx/glxext.c b/glx/glxext.c
+index e41b881..06ee813 100644
+--- a/glx/glxext.c
++++ b/glx/glxext.c
+@@ -210,6 +210,7 @@ __glXFreeContext(__GLXcontext * cx)
+ 
+     if (!glxBlockClients) {
+         __glXleaveServer(GL_FALSE);
++        LogMessageVerb(X_DEBUG, 4, "GLX: Destroying context %x\n", cx);
+         cx->destroy(cx);
+         __glXenterServer(GL_FALSE);
+     }
+@@ -469,6 +470,8 @@ __glXForceCurrent(__GLXclientState * cl, GLXContextTag tag, int *error)
+ 
+     /* Make this context the current one for the GL. */
+     if (!cx->isDirect) {
++        LogMessageVerb(X_DEBUG, 4, "GLX: Force losing context\n");
++        //(*cx->loseCurrent) (cx);
+         lastGLContext = cx;
+         if (!(*cx->makeCurrent) (cx)) {
+             /* Bind failed, and set the error code.  Bummer */
+-- 
+2.1.4
+
