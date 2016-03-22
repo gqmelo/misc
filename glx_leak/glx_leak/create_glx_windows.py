@@ -1,6 +1,6 @@
-from Xlib import X, display
 from OpenGL import GL, GLX
 from OpenGL.raw._GLX import struct__XDisplay
+from Xlib import X, display
 from ctypes import *
 
 def draw_square(display, window):
@@ -19,6 +19,8 @@ def draw_square(display, window):
 
     # assume we got a double buffered fbConfig and show what we drew
     GLX.glXSwapBuffers(display, window)
+
+    GL.glFlush()
 
 # some python-xlib code...
 pd = display.Display()
