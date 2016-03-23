@@ -14,7 +14,9 @@ Window root;
 GLint att[] = { GLX_RGBA, GLX_DEPTH_SIZE, 24, GLX_DOUBLEBUFFER, None };
 XVisualInfo *vi;
 Colormap cmap;
+Colormap cmap2;
 XSetWindowAttributes swa;
+XSetWindowAttributes swa2;
 Window win;
 Window win2;
 GLXContext glc;
@@ -66,14 +68,18 @@ int main(int argc, char *argv[]) {
     }
 
     cmap = XCreateColormap(dpy, root, vi->visual, AllocNone);
+    cmap2 = XCreateColormap(dpy, root, vi->visual, AllocNone);
 
     swa.colormap = cmap;
     swa.event_mask = ExposureMask | KeyPressMask;
 
+    swa2.colormap = cmap2;
+    swa2.event_mask = ExposureMask | KeyPressMask;
+
     win = XCreateWindow(dpy, root, 0, 0, 300, 300, 0, vi->depth, InputOutput,
             vi->visual, CWColormap | CWEventMask, &swa);
     win2 = XCreateWindow(dpy, root, 300, 300, 300, 300, 0, vi->depth, InputOutput,
-            vi->visual, CWColormap | CWEventMask, &swa);
+            vi->visual, CWColormap | CWEventMask, &swa2);
 
     XMapWindow(dpy, win);
     XMapWindow(dpy, win2);
