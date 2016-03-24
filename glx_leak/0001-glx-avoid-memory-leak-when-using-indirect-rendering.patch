@@ -1,8 +1,7 @@
-From f4476f04af28a31ed121a2141eaddcb493b7fd0b Mon Sep 17 00:00:00 2001
+From b921bbbdb9d3d79d1ff487b4f3270fb675ba69d2 Mon Sep 17 00:00:00 2001
 From: Guilherme Quentel Melo <gqmelo@gmail.com>
 Date: Thu, 24 Mar 2016 03:13:30 -0300
-Subject: [[PATCH glx] 1/2] glx: avoid memory leak when using indirect
- rendering
+Subject: [[PATCH glx]] glx: avoid memory leak when using indirect rendering
 
 When multiple processes are using GL with indirect rendering a race
 condition can make drawables refcount never drop to zero.
@@ -25,7 +24,7 @@ Signed-off-by: Guilherme Quentel Melo <gqmelo@gmail.com>
  2 files changed, 18 insertions(+), 3 deletions(-)
 
 diff --git a/glx/glxcmds.c b/glx/glxcmds.c
-index f5f2bab..0c59cd5 100644
+index f5f2bab..94b31b8 100644
 --- a/glx/glxcmds.c
 +++ b/glx/glxcmds.c
 @@ -551,7 +551,7 @@ DoMakeCurrent(__GLXclientState * cl,
@@ -48,7 +47,7 @@ index f5f2bab..0c59cd5 100644
          }
      }
  
-+    /* 
++    /*
 +     ** lastGLContext may be different than prevglxc, so we need lose it to
 +     ** avoid a memory leak
 +     */
