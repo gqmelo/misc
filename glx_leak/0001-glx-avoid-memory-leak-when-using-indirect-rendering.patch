@@ -1,0 +1,92 @@
+From f4476f04af28a31ed121a2141eaddcb493b7fd0b Mon Sep 17 00:00:00 2001
+From: Guilherme Quentel Melo <gqmelo@gmail.com>
+Date: Thu, 24 Mar 2016 03:13:30 -0300
+Subject: [[PATCH glx] 1/2] glx: avoid memory leak when using indirect
+ rendering
+
+When multiple processes are using GL with indirect rendering a race
+condition can make drawables refcount never drop to zero.
+
+This situation could happen when there are many X clients using indirect GLX:
+
+1 - client1: calls glXMakeCurrent
+
+2 - client2: calls glXMakeCurrent
+This is the first context switch for this client. So old_context_tag=0
+
+3 - client1: calls glXRender
+For the client, its context is already current.
+For the server side lastGLContext points to client2's context.
+
+Signed-off-by: Guilherme Quentel Melo <gqmelo@gmail.com>
+---
+ glx/glxcmds.c | 15 +++++++++++++--
+ glx/glxext.c  |  6 +++++-
+ 2 files changed, 18 insertions(+), 3 deletions(-)
+
+diff --git a/glx/glxcmds.c b/glx/glxcmds.c
+index f5f2bab..0c59cd5 100644
+--- a/glx/glxcmds.c
++++ b/glx/glxcmds.c
+@@ -551,7 +551,7 @@ DoMakeCurrent(__GLXclientState * cl,
+ {
+     ClientPtr client = cl->client;
+     xGLXMakeCurrentReply reply;
+-    __GLXcontext *glxc, *prevglxc;
++    __GLXcontext *glxc, *prevglxc, *lastglxc = NULL;
+     __GLXdrawable *drawPriv = NULL;
+     __GLXdrawable *readPriv = NULL;
+     int error;
+@@ -642,13 +642,24 @@ DoMakeCurrent(__GLXclientState * cl,
+         if (!(*prevglxc->loseCurrent) (prevglxc)) {
+             return __glXError(GLXBadContext);
+         }
+-        lastGLContext = NULL;
+         if (!prevglxc->isDirect) {
+             prevglxc->drawPriv = NULL;
+             prevglxc->readPriv = NULL;
+         }
+     }
+ 
++    /* 
++     ** lastGLContext may be different than prevglxc, so we need lose it to
++     ** avoid a memory leak
++     */
++    if (lastGLContext != NULL) {
++        lastglxc = (__GLXcontext*)lastGLContext;
++        if (!lastglxc->isDirect && lastglxc != prevglxc) {
++            (*lastglxc->loseCurrent) (lastglxc);
++        }
++        lastGLContext = NULL;
++    }
++
+     if ((glxc != 0) && !glxc->isDirect) {
+ 
+         glxc->drawPriv = drawPriv;
+diff --git a/glx/glxext.c b/glx/glxext.c
+index e41b881..c556489 100644
+--- a/glx/glxext.c
++++ b/glx/glxext.c
+@@ -434,7 +434,7 @@ GlxExtensionInit(void)
+ __GLXcontext *
+ __glXForceCurrent(__GLXclientState * cl, GLXContextTag tag, int *error)
+ {
+-    __GLXcontext *cx;
++    __GLXcontext *cx, *lastglxc = NULL;
+ 
+     /*
+      ** See if the context tag is legal; it is managed by the extension,
+@@ -469,6 +469,10 @@ __glXForceCurrent(__GLXclientState * cl, GLXContextTag tag, int *error)
+ 
+     /* Make this context the current one for the GL. */
+     if (!cx->isDirect) {
++        if (lastGLContext != NULL) {
++            lastglxc = (__GLXcontext*)lastGLContext;
++            (*lastglxc->loseCurrent) (lastglxc);
++        }
+         lastGLContext = cx;
+         if (!(*cx->makeCurrent) (cx)) {
+             /* Bind failed, and set the error code.  Bummer */
+-- 
+2.1.4
+
