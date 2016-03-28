@@ -11,7 +11,7 @@
      --disable-osmesa --enable-glx-tls --enable-shared-glapi --enable-texture-float \
      --disable-xvmc --disable-omx --enable-driglx-direct --enable-dri3 \
      --with-egl-platforms="x11 wayland drm" --enable-xa --enable-gallium-llvm \
-     ac_cv_path_LLVM_CONFIG=llvm-config-3.6 --enable-vdpau \
+     ac_cv_path_LLVM_CONFIG=llvm-config-3.6 \
      --with-gallium-drivers=" nouveau svga r600 r300 radeonsi swrast" \
      --enable-gles1 --enable-gles2 \
      CFLAGS="-g -O0 -fstack-protector --param=ssp-buffer-size=4 -Wformat -Werror=format-security -Wall" \
