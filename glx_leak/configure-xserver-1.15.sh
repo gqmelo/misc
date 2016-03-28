@@ -16,6 +16,7 @@
     --enable-dri2 --enable-dri3 --enable-present --enable-xinerama --enable-xf86vidmode --enable-xace --enable-xselinux \
     --enable-xfree86-utils --enable-dmx --enable-xvfb --enable-xnest --enable-kdrive --enable-xephyr \
     --enable-xmir --with-sha1=libgcrypt --enable-xcsecurity \
+    PKG_CONFIG_PATH=$HOME/local/lib/x86_64-linux-gnu/pkgconfig \
     CFLAGS="-g -O0 -fPIE -fstack-protector --param=ssp-buffer-size=4 -Wformat -Werror=format-security" \
     CPPFLAGS="-D_FORTIFY_SOURCE=2 -DPRE_RELEASE=0" \
     CXXFLAGS="-g -O0 -fPIE -fstack-protector --param=ssp-buffer-size=4 -Wformat -Werror=format-security" \
