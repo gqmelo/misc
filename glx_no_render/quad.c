@@ -81,14 +81,15 @@ int main(int argc, char *argv[]) {
     win2 = XCreateWindow(dpy, root, 300, 300, 300, 300, 0, vi->depth, InputOutput,
             vi->visual, CWColormap | CWEventMask, &swa2);
 
-    XMapWindow(dpy, win);
     XMapWindow(dpy, win2);
+    XMapWindow(dpy, win);
     XStoreName(dpy, win, "First Window");
     XStoreName(dpy, win2, "Second Window");
 
     XSync(dpy, 0);
 
     glc = glXCreateContext(dpy, vi, NULL, GL_TRUE);
+//     glXMakeCurrent(dpy, win, glc);
     glXMakeCurrent(dpy, win2, glc);
     printf("OpenGL version: %s\n", (char*)glGetString(GL_VERSION));
     glXMakeCurrent(dpy, None, NULL);
@@ -111,6 +112,7 @@ int main(int argc, char *argv[]) {
             glXMakeCurrent(dpy, None, NULL);
             glXDestroyContext(dpy, glc);
             XDestroyWindow(dpy, win);
+//             XDestroyWindow(dpy, win2);
             XCloseDisplay(dpy);
             exit(0);
         }

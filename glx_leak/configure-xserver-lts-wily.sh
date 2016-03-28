@@ -16,12 +16,12 @@
     --enable-glamor --enable-dri3 --enable-present --enable-xinerama --enable-xf86vidmode --enable-xace \
     --enable-xselinux --enable-xfree86-utils --enable-xwayland --enable-dmx --enable-xvfb --enable-xnest \
     --enable-kdrive --enable-xephyr --with-sha1=libgcrypt --enable-xcsecurity \
-    CFLAGS='-g -O0 -fPIE -fstack-protector-strong -Wformat -Werror=format-security' \
+    CFLAGS='-g -O0 -fPIE -fstack-protector -Wformat -Werror=format-security' \
     CPPFLAGS='-D_FORTIFY_SOURCE=2 -DPRE_RELEASE=0' \
-     CXXFLAGS='-g -O0 -fPIE -fstack-protector-strong -Wformat -Werror=format-security' \
-     FCFLAGS='-g -O0 -fPIE -fstack-protector-strong' \
-     FFLAGS='-g -O0 -fPIE -fstack-protector-strong' \
-     GCJFLAGS='-g -O0 -fPIE -fstack-protector-strong' \
+     CXXFLAGS='-g -O0 -fPIE -fstack-protector -Wformat -Werror=format-security' \
+     FCFLAGS='-g -O0 -fPIE -fstack-protector' \
+     FFLAGS='-g -O0 -fPIE -fstack-protector' \
+     GCJFLAGS='-g -O0 -fPIE -fstack-protector' \
      LDFLAGS=-'Wl,-Bsymbolic-functions -fPIE -pie -Wl,-z,relro -Wl,-Bsymbolic' \
-     OBJCFLAGS='-g -O0 -fPIE -fstack-protector-strong -Wformat -Werror=format-security' \
-     OBJCXXFLAGS='-g -O0 -fPIE -fstack-protector-strong -Wformat -Werror=format-security' LIBS=
+     OBJCFLAGS='-g -O0 -fPIE -fstack-protector -Wformat -Werror=format-security' \
+     OBJCXXFLAGS='-g -O0 -fPIE -fstack-protector -Wformat -Werror=format-security' LIBS=
