@@ -1,0 +1,55 @@
+From 00e293e7c94e565e1a17e6c39738a0dd367a82c9 Mon Sep 17 00:00:00 2001
+From: Guilherme Quentel Melo <guilherme@esss.com.br>
+Date: Tue, 29 Mar 2016 19:44:43 -0300
+Subject: [PATCH] Dirty hack to reproduce the framebuffer reuse bug
+
+USE AT YOUR OWN RISK
+---
+ src/gallium/state_trackers/dri/dri_drawable.c | 13 ++++++++++---
+ 1 file changed, 10 insertions(+), 3 deletions(-)
+
+diff --git a/src/gallium/state_trackers/dri/dri_drawable.c b/src/gallium/state_trackers/dri/dri_drawable.c
+index f0cc4a2..e3e5118 100644
+--- a/src/gallium/state_trackers/dri/dri_drawable.c
++++ b/src/gallium/state_trackers/dri/dri_drawable.c
+@@ -130,11 +130,18 @@ dri_create_buffer(__DRIscreen * sPriv,
+ {
+    struct dri_screen *screen = sPriv->driverPrivate;
+    struct dri_drawable *drawable = NULL;
++   static struct dri_drawable *static_drawable = NULL;
+ 
+    if (isPixmap)
+       goto fail;		       /* not implemented */
+ 
+-   drawable = CALLOC_STRUCT(dri_drawable);
++   if (static_drawable == NULL) {
++      static_drawable = CALLOC_STRUCT(dri_drawable);
++   }
++   else {
++       memset(static_drawable, 0, sizeof(static_drawable));
++   }
++   drawable = static_drawable;
+    if (drawable == NULL)
+       goto fail;
+ 
+@@ -158,7 +165,7 @@ dri_create_buffer(__DRIscreen * sPriv,
+ 
+    return GL_TRUE;
+ fail:
+-   FREE(drawable);
++//   FREE(drawable);
+    return GL_FALSE;
+ }
+ 
+@@ -177,7 +184,7 @@ dri_destroy_buffer(__DRIdrawable * dPriv)
+ 
+    swap_fences_unref(drawable);
+ 
+-   FREE(drawable);
++//   FREE(drawable);
+ }
+ 
+ /**
+-- 
+2.5.0
+

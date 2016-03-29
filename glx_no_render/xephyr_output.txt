@@ -1,0 +1,406 @@
+(II) SELinux: Disabled on system
+(DB) __glXDRIscreenProbe
+(DB) initializeExtensions
+(II) AIGLX: Loaded and initialized swrast
+(II) GLX: Initialized DRISWRAST GL provider for screen 0
+(II) XKB: Reusing cached keymap
+(II) XKB: Reusing cached keymap
+(DB) 
+
+
+
+
+
+__glXDRIscreenCreateContext
+_mesa_initialize_context
+(DB) DoMakeCurrent
+(DB) __glXGetDrawable
+(DB)     glxc: 53570770
+(DB)     drawId: 200002
+(DB) __glXDRIscreenCreateDrawable
+driCreateNewDrawable
+dri_create_buffer
+    sPriv: 532e2260
+    dPriv: 53652450
+    dPriv->driverPrivate: 53652490
+    drawable->base.stamp: 1
+(DB) __glXGetDrawable
+(DB)     glxc: 53570770
+(DB)     drawId: 200002
+(DB)     glxc->drawPriv: 53652250
+(DB)     glxc->readPriv: 53652250
+(DB) __glXDRIcontextMakeCurrent
+driBindContext
+dri_make_current
+dri_make_current
+    cPriv: 53570690
+    driDrawPriv: 53652450
+    driReadPriv: 53652450
+    ctx: 53570820
+    draw: 53652490
+    read: 53652490
+    old_st: 0
+st_api_make_current
+    st: 5364a8a0
+    stctxi: 5364a8a0
+    stdrawi: 53652490
+    streadi: 53652490
+    st->ctx: 4f01d010
+    st->ctx->WinSysDrawBuffer: 0
+../../../../src/mesa/state_tracker/st_manager.c:st_framebuffer_reuse_or_create
+    fb: 0
+    stfbi: 53652490
+    cur: 0
+    Creating new framebuffer
+st_framebuffer_create
+    st: 5364a8a0
+    stfbi: 53652490
+    Assigning stfb->iface to: 53652490
+_mesa_reference_framebuffer
+_mesa_reference_framebuffer_
+    *ptr 0
+    fb 536526a0
+    fb->RefCount: 2
+st_framebuffer_validate
+    stfb: 536526a0
+    Checking incomplete fb
+    Checking stamp
+    stfb->iface_stamp: 0
+    new_stamp: 1
+    Validating framebuffer
+dri_st_framebuffer_validate
+drisw_update_drawable_info
+get_drawable_info
+(DB) swrastGetDrawableInfo
+_mesa_make_current
+    newCtx: 4f01d010
+    curCtx: 0
+_mesa_reference_framebuffer
+_mesa_reference_framebuffer_
+    *ptr 0
+    fb 536526a0
+    fb->RefCount: 3
+_mesa_reference_framebuffer
+_mesa_reference_framebuffer_
+    *ptr 0
+    fb 536526a0
+    fb->RefCount: 4
+_mesa_reference_framebuffer
+_mesa_reference_framebuffer_
+    *ptr 0
+    fb 536526a0
+    fb->RefCount: 5
+_mesa_reference_framebuffer
+_mesa_reference_framebuffer_
+    *ptr 0
+    fb 536526a0
+    fb->RefCount: 6
+_mesa_reference_framebuffer
+_mesa_reference_framebuffer_
+    *ptr 536526a0
+    fb 0
+    oldFb->RefCount: 5
+_mesa_reference_framebuffer
+_mesa_reference_framebuffer_
+    *ptr 536526a0
+    fb 0
+    oldFb->RefCount: 4
+(DB) StopUsingContext
+(DB)     glxc: 0
+(DB) StartUsingContext
+(DB)     cl: 5355c8d8
+(DB)     glxc: 53570770
+(DB) DoMakeCurrent
+(DB) __glXDRIcontextLoseCurrent
+driUnbindContext
+dri_unbind_context
+st_api_make_current
+    st: 0
+    stctxi: 0
+    stdrawi: 0
+    streadi: 0
+_mesa_make_current
+    newCtx: 0
+    curCtx: 4f01d010
+(DB) StopUsingContext
+(DB)     glxc: 53570770
+(DB) GLX: DrawableGone, glxPriv: 53652250, xid: 200002
+(DB) GLX: glxPriv->type == GLX_DRAWABLE_WINDOW
+(DB) GLX: Checking context: 200005
+(DB) GLX: c->currentClient: 0
+(DB) GLX: c->drawPriv: 0
+(DB) GLX: c->readPriv: 0
+(DB) GLX: glxPriv: 53652250
+(DB) GLX: Not destroying pixmap
+(DB) __glXDRIdrawableDestroy
+(DB) GLX: Destroying private->driDrawable: 53652450
+dri_destroy_buffer
+(DB) GLX: Freeing private->gc: 536522d0
+(DB) GLX: Freeing private->swapgc: 53652390
+(DB) GLX: Releasing drawable: 53652250
+(DB) GLX: Freeing private: 53652250
+(DB) DoMakeCurrent
+(DB) __glXGetDrawable
+(DB)     glxc: 53570770
+(DB)     drawId: 200004
+(DB) __glXDRIscreenCreateDrawable
+driCreateNewDrawable
+dri_create_buffer
+    sPriv: 532e2260
+    dPriv: 53652450
+    dPriv->driverPrivate: 53652490
+    drawable->base.stamp: 1
+(DB) __glXGetDrawable
+(DB)     glxc: 53570770
+(DB)     drawId: 200004
+(DB)     glxc->drawPriv: 53652250
+(DB)     glxc->readPriv: 53652250
+(DB) __glXDRIcontextMakeCurrent
+driBindContext
+dri_make_current
+dri_make_current
+    cPriv: 53570690
+    driDrawPriv: 53652450
+    driReadPriv: 53652450
+    ctx: 53570820
+    draw: 53652490
+    read: 53652490
+    old_st: 0
+st_api_make_current
+    st: 5364a8a0
+    stctxi: 5364a8a0
+    stdrawi: 53652490
+    streadi: 53652490
+    st->ctx: 4f01d010
+    st->ctx->WinSysDrawBuffer: 536526a0
+../../../../src/mesa/state_tracker/st_manager.c:st_framebuffer_reuse_or_create
+    fb: 536526a0
+    stfbi: 53652490
+    cur: 536526a0
+    cur->Base: 536526a0
+    _mesa_get_incomplete_framebuffer(): 47e5d6e0
+    cur->iface: 53652490
+    Reusing framebuffer
+_mesa_reference_framebuffer
+_mesa_reference_framebuffer_
+    *ptr 0
+    fb 536526a0
+    fb->RefCount: 5
+_mesa_reference_framebuffer
+_mesa_reference_framebuffer_
+    *ptr 0
+    fb 536526a0
+    fb->RefCount: 6
+st_framebuffer_validate
+    stfb: 536526a0
+    Checking incomplete fb
+    Checking stamp
+    stfb->iface_stamp: 1
+    new_stamp: 1
+_mesa_make_current
+    newCtx: 4f01d010
+    curCtx: 0
+_mesa_reference_framebuffer
+_mesa_reference_framebuffer
+_mesa_reference_framebuffer
+_mesa_reference_framebuffer
+_mesa_reference_framebuffer
+_mesa_reference_framebuffer_
+    *ptr 536526a0
+    fb 0
+    oldFb->RefCount: 5
+_mesa_reference_framebuffer
+_mesa_reference_framebuffer_
+    *ptr 536526a0
+    fb 0
+    oldFb->RefCount: 4
+(DB) StopUsingContext
+(DB)     glxc: 0
+(DB) StartUsingContext
+(DB)     cl: 5355c8d8
+(DB)     glxc: 53570770
+(DB) __glXDisp_Render
+st_framebuffer_validate
+    stfb: 536526a0
+    Checking incomplete fb
+    Checking stamp
+    stfb->iface_stamp: 1
+    new_stamp: 1
+st_framebuffer_validate
+    stfb: 536526a0
+    Checking incomplete fb
+    Checking stamp
+    stfb->iface_stamp: 1
+    new_stamp: 1
+(DB) __glXGetDrawable
+(DB)     glxc: 53570770
+(DB)     drawId: 200004
+(DB) __glXDRIdrawableSwapBuffers
+(DB) private->driDrawable: 53652450
+driSwapBuffers
+pdp: 53652450
+pdp->driScreenPriv: 532e2260
+pdp->driScreenPriv->driver: 47e475c0
+pdp->driScreenPriv->driver->SwapBuffers: 4739fcb5
+(DB) DoMakeCurrent
+(DB) __glXGetDrawable
+(DB)     glxc: 53570770
+(DB)     drawId: 200004
+(DB) __glXGetDrawable
+(DB)     glxc: 53570770
+(DB)     drawId: 200004
+(DB) __glXDRIcontextLoseCurrent
+driUnbindContext
+dri_unbind_context
+st_api_make_current
+    st: 0
+    stctxi: 0
+    stdrawi: 0
+    streadi: 0
+_mesa_make_current
+    newCtx: 0
+    curCtx: 4f01d010
+(DB)     glxc->drawPriv: 53652250
+(DB)     glxc->readPriv: 53652250
+(DB) __glXDRIcontextMakeCurrent
+driBindContext
+dri_make_current
+dri_make_current
+    cPriv: 53570690
+    driDrawPriv: 53652450
+    driReadPriv: 53652450
+    ctx: 53570820
+    draw: 53652490
+    read: 53652490
+    old_st: 0
+st_api_make_current
+    st: 5364a8a0
+    stctxi: 5364a8a0
+    stdrawi: 53652490
+    streadi: 53652490
+    st->ctx: 4f01d010
+    st->ctx->WinSysDrawBuffer: 536526a0
+../../../../src/mesa/state_tracker/st_manager.c:st_framebuffer_reuse_or_create
+    fb: 536526a0
+    stfbi: 53652490
+    cur: 536526a0
+    cur->Base: 536526a0
+    _mesa_get_incomplete_framebuffer(): 47e5d6e0
+    cur->iface: 53652490
+    Reusing framebuffer
+_mesa_reference_framebuffer
+_mesa_reference_framebuffer_
+    *ptr 0
+    fb 536526a0
+    fb->RefCount: 5
+_mesa_reference_framebuffer
+_mesa_reference_framebuffer_
+    *ptr 0
+    fb 536526a0
+    fb->RefCount: 6
+st_framebuffer_validate
+    stfb: 536526a0
+    Checking incomplete fb
+    Checking stamp
+    stfb->iface_stamp: 1
+    new_stamp: 1
+_mesa_make_current
+    newCtx: 4f01d010
+    curCtx: 0
+_mesa_reference_framebuffer
+_mesa_reference_framebuffer
+_mesa_reference_framebuffer
+_mesa_reference_framebuffer
+_mesa_reference_framebuffer
+_mesa_reference_framebuffer_
+    *ptr 536526a0
+    fb 0
+    oldFb->RefCount: 5
+_mesa_reference_framebuffer
+_mesa_reference_framebuffer_
+    *ptr 536526a0
+    fb 0
+    oldFb->RefCount: 4
+(DB) StopUsingContext
+(DB)     glxc: 53570770
+(DB) StartUsingContext
+(DB)     cl: 5355c8d8
+(DB)     glxc: 53570770
+(DB) __glXDisp_Render
+st_framebuffer_validate
+    stfb: 536526a0
+    Checking incomplete fb
+    Checking stamp
+    stfb->iface_stamp: 1
+    new_stamp: 1
+st_framebuffer_validate
+    stfb: 536526a0
+    Checking incomplete fb
+    Checking stamp
+    stfb->iface_stamp: 1
+    new_stamp: 1
+(DB) __glXGetDrawable
+(DB)     glxc: 53570770
+(DB)     drawId: 200004
+(DB) __glXDRIdrawableSwapBuffers
+(DB) private->driDrawable: 53652450
+driSwapBuffers
+pdp: 53652450
+pdp->driScreenPriv: 532e2260
+pdp->driScreenPriv->driver: 47e475c0
+pdp->driScreenPriv->driver->SwapBuffers: 4739fcb5
+(DB) DoMakeCurrent
+(DB) __glXDRIcontextLoseCurrent
+driUnbindContext
+dri_unbind_context
+st_api_make_current
+    st: 0
+    stctxi: 0
+    stdrawi: 0
+    streadi: 0
+_mesa_make_current
+    newCtx: 0
+    curCtx: 4f01d010
+(DB) StopUsingContext
+(DB)     glxc: 53570770
+(DB) __glXDRIcontextDestroy
+dri_destroy_context
+_mesa_free_context_data
+_mesa_make_current
+    newCtx: 4f01d010
+    curCtx: 0
+_mesa_reference_framebuffer
+_mesa_reference_framebuffer_
+    *ptr 536526a0
+    fb 0
+    oldFb->RefCount: 3
+_mesa_reference_framebuffer
+_mesa_reference_framebuffer_
+    *ptr 536526a0
+    fb 0
+    oldFb->RefCount: 2
+_mesa_reference_framebuffer
+_mesa_reference_framebuffer_
+    *ptr 536526a0
+    fb 0
+    oldFb->RefCount: 1
+_mesa_reference_framebuffer
+_mesa_reference_framebuffer_
+    *ptr 536526a0
+    fb 0
+    oldFb->RefCount: 0
+    Deleting fb: 536526a0
+_mesa_make_current
+    newCtx: 0
+    curCtx: 4f01d010
+(DB) GLX: DrawableGone, glxPriv: 53652250, xid: 200004
+(DB) GLX: glxPriv->type == GLX_DRAWABLE_WINDOW
+(DB) GLX: Not destroying pixmap
+(DB) __glXDRIdrawableDestroy
+(DB) GLX: Destroying private->driDrawable: 53652450
+dri_destroy_buffer
+(DB) GLX: Freeing private->gc: 53567d80
+(DB) GLX: Freeing private->swapgc: 53652300
+(DB) GLX: Releasing drawable: 53652250
+(DB) GLX: Freeing private: 53652250
+(DB) __glXDRIscreenDestroy
