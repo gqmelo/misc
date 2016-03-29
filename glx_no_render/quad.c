@@ -47,6 +47,22 @@ void DrawAQuad() {
     glEnd();
 }
 
+void CreateWindow(Colormap *cmap, XSetWindowAttributes *swa, Window *win, Display* dpy, const char* title) {
+    *cmap = XCreateColormap(dpy, root, vi->visual, AllocNone);
+
+    swa->colormap = *cmap;
+    swa->event_mask = ExposureMask | KeyPressMask;
+
+    *win = XCreateWindow(dpy, root, 0, 0, 300, 300, 0, vi->depth, InputOutput,
+            vi->visual, CWColormap | CWEventMask, swa);
+
+    XMapWindow(dpy, *win);
+    XStoreName(dpy, *win, title);
+
+    XSync(dpy, 0);
+}
+
+
 int main(int argc, char *argv[]) {
 
     dpy = XOpenDisplay(NULL);
@@ -67,33 +83,15 @@ int main(int argc, char *argv[]) {
         printf("\n\tvisual %p selected\n", (void *) vi->visualid); /* %p creates hexadecimal output like in glxinfo */
     }
 
-    cmap = XCreateColormap(dpy, root, vi->visual, AllocNone);
-    cmap2 = XCreateColormap(dpy, root, vi->visual, AllocNone);
-
-    swa.colormap = cmap;
-    swa.event_mask = ExposureMask | KeyPressMask;
-
-    swa2.colormap = cmap2;
-    swa2.event_mask = ExposureMask | KeyPressMask;
-
-    win = XCreateWindow(dpy, root, 0, 0, 300, 300, 0, vi->depth, InputOutput,
-            vi->visual, CWColormap | CWEventMask, &swa);
-    win2 = XCreateWindow(dpy, root, 300, 300, 300, 300, 0, vi->depth, InputOutput,
-            vi->visual, CWColormap | CWEventMask, &swa2);
-
-    XMapWindow(dpy, win2);
-    XMapWindow(dpy, win);
-    XStoreName(dpy, win, "First Window");
-    XStoreName(dpy, win2, "Second Window");
-
-    XSync(dpy, 0);
+    CreateWindow(&cmap2, &swa2, &win2, dpy, "Second Window");
+    CreateWindow(&cmap, &swa, &win, dpy, "First Window");
 
     glc = glXCreateContext(dpy, vi, NULL, GL_TRUE);
-//     glXMakeCurrent(dpy, win, glc);
     glXMakeCurrent(dpy, win2, glc);
     printf("OpenGL version: %s\n", (char*)glGetString(GL_VERSION));
     glXMakeCurrent(dpy, None, NULL);
     XDestroyWindow(dpy, win2);
+
 
     glEnable(GL_DEPTH_TEST);
 
