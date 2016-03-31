@@ -1,6 +1,6 @@
 #!/bin/sh
 
-../configure --prefix=$HOME/xserver-xorg-1.15 --mandir='${prefix}/share/man' --infodir='${prefix}/share/info' \
+../configure --prefix=$HOME/local --mandir='${prefix}/share/man' --infodir='${prefix}/share/info' \
     --sysconfdir=/etc --localstatedir=/var --build=x86_64-linux-gnu lt_cv_prog_compiler_static_works=no \
     lt_cv_prog_compiler_static_works=no --disable-silent-rules --disable-static --without-dtrace \
     --disable-strict-compilation --disable-debug --enable-unit-tests --with-int10=x86emu \
