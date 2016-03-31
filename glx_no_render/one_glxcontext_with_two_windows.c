@@ -88,7 +88,11 @@ int main(int argc, char *argv[]) {
 
     glc = glXCreateContext(dpy, vi, NULL, GL_TRUE);
     glXMakeCurrent(dpy, win2, glc);
-    printf("OpenGL version: %s\n", (char*)glGetString(GL_VERSION));
+    printf("GL_VENDOR: %s\n", (char*)glGetString(GL_VENDOR));
+    printf("GL_RENDERER: %s\n", (char*)glGetString(GL_RENDERER));
+    printf("GL_VERSION: %s\n", (char*)glGetString(GL_VERSION));
+    printf("GL_SHADING_LANGUAGE_VERSION: %s\n", (char*)glGetString(GL_SHADING_LANGUAGE_VERSION));
+    printf("GL_EXTENSIONS: %s\n", (char*)glGetString(GL_SHADING_LANGUAGE_VERSION));
     glXMakeCurrent(dpy, None, NULL);
     XDestroyWindow(dpy, win2);
 
