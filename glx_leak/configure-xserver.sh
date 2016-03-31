@@ -1,5 +1,13 @@
 #!/usr/bin/env bash
 
+ARG="$1"
+
+if [ "$ARG" == "-d" ]; then
+    OOPTION="-O0"
+else
+    OOPTION="-O2"
+fi
+
 ../configure --prefix=$HOME/local --mandir='${prefix}/share/man' --infodir='${prefix}/share/info' --sysconfdir=/etc \
     --localstatedir=/var --build=x86_64-linux-gnu lt_cv_prog_compiler_static_works=no lt_cv_prog_compiler_static_works=no \
     --disable-silent-rules --disable-static --without-dtrace --disable-strict-compilation --disable-debug \
@@ -17,12 +25,12 @@
     --enable-xselinux --enable-xfree86-utils --enable-xwayland --enable-dmx --enable-xvfb --enable-xnest \
     --enable-kdrive --enable-xephyr --with-sha1=libgcrypt --enable-xcsecurity \
     PKG_CONFIG_PATH=$HOME/local/lib/x86_64-linux-gnu/pkgconfig \
-    CFLAGS='-g -O0 -fPIE -fstack-protector-strong -Wformat -Werror=format-security' \
-    CPPFLAGS='-D_FORTIFY_SOURCE=2 -DPRE_RELEASE=0' \
-     CXXFLAGS='-g -O0 -fPIE -fstack-protector-strong -Wformat -Werror=format-security' \
-     FCFLAGS='-g -O0 -fPIE -fstack-protector-strong' \
-     FFLAGS='-g -O0 -fPIE -fstack-protector-strong' \
-     GCJFLAGS='-g -O0 -fPIE -fstack-protector-strong' \
-     LDFLAGS=-'Wl,-Bsymbolic-functions -fPIE -pie -Wl,-z,relro -Wl,-Bsymbolic' \
-     OBJCFLAGS='-g -O0 -fPIE -fstack-protector-strong -Wformat -Werror=format-security' \
-     OBJCXXFLAGS='-g -O0 -fPIE -fstack-protector-strong -Wformat -Werror=format-security' LIBS=
+    CFLAGS="-g $OOPTION -fPIE -fstack-protector-strong -Wformat -Werror=format-security" \
+    CPPFLAGS="-D_FORTIFY_SOURCE=2 -DPRE_RELEASE=0" \
+     CXXFLAGS="-g $OOPTION -fPIE -fstack-protector-strong -Wformat -Werror=format-security" \
+     FCFLAGS="-g $OOPTION -fPIE -fstack-protector-strong" \
+     FFLAGS="-g $OOPTION -fPIE -fstack-protector-strong" \
+     GCJFLAGS="-g $OOPTION -fPIE -fstack-protector-strong" \
+     LDFLAGS=-"Wl,-Bsymbolic-functions -fPIE -pie -Wl,-z,relro -Wl,-Bsymbolic" \
+     OBJCFLAGS="-g $OOPTION -fPIE -fstack-protector-strong -Wformat -Werror=format-security" \
+     OBJCXXFLAGS="-g $OOPTION -fPIE -fstack-protector-strong -Wformat -Werror=format-security" LIBS=
