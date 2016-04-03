@@ -1,0 +1,9 @@
+<headers>
+    {RELPATH}/include/
+</headers>
+
+<libs>
+    {RELPATH}/lib/
+</libs>
+
+
