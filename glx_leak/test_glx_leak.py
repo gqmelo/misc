@@ -1,7 +1,6 @@
 import pexpect
 import os
 
-script_filename = os.path.join(os.path.dirname(__file__), 'glx_leak', 'create_glx_windows.py')
 env = os.environ.copy()
 env['LIBGL_ALWAYS_INDIRECT'] = 1
 
