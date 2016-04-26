@@ -22,6 +22,9 @@ Window win2;
 GLXContext glc;
 XWindowAttributes gwa;
 XEvent xev;
+char *user_input;
+int bytes_read;
+int nbytes = 100;
 
 void DrawAQuad() {
     glClearColor(1.0, 1.0, 1.0, 1.0);
@@ -107,9 +110,8 @@ int main(int argc, char *argv[]) {
             glViewport(0, 0, gwa.width, gwa.height);
             DrawAQuad();
             glXSwapBuffers(dpy, win);
-        }
-
-        else if (xev.type == KeyPress) {
+            puts("Press Enter to finish");
+            bytes_read = getline(&user_input, &nbytes, stdin);
             glXMakeCurrent(dpy, None, NULL);
             glXDestroyContext(dpy, glc);
             XDestroyWindow(dpy, win);
