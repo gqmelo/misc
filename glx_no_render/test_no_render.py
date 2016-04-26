@@ -23,8 +23,13 @@ subprocess.check_call(['import', '-display', ':1', '-window', str(window_id), ob
 
 expected = Image.open('expected.png')
 obtained = Image.open(obtained_filename)
-if ImageChops.difference(expected, obtained).getbbox() is not None:
-    print 'Captured image "%s" is different' % obtained_filename
-
+try:
+    if ImageChops.difference(expected, obtained).getbbox() is None:
+        print '%s: OK' % obtained_filename
+    else:
+        print '%s: ERROR' % obtained_filename
+except ValueError as e:
+    print '%s: ERROR - %s' % (obtained_filename, e.message)
+    
 glx_process_1.sendline('')
 glx_process_1.expect(pexpect.EOF)
