@@ -1,0 +1,4 @@
+#!/bin/sh
+
+inthing screenshot --url | tail -n1 | xclip -selection clipboard
+
