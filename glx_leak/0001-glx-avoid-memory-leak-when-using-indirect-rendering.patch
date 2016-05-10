@@ -1,7 +1,8 @@
-From 3dc360e2998392d62af7c8272819e2c91350d183 Mon Sep 17 00:00:00 2001
+From 1fabb089a3993a328eb0aaa68b14932f5c831fcb Mon Sep 17 00:00:00 2001
 From: Guilherme Quentel Melo <gqmelo@gmail.com>
 Date: Thu, 24 Mar 2016 03:13:30 -0300
-Subject: [PATCH] glx: avoid memory leak when using indirect rendering
+Subject: [PATCH xserver v3] glx: avoid memory leak when using indirect
+ rendering
 
 When multiple processes are using GL with indirect rendering a race
 condition can make drawables refcount never drop to zero.
@@ -20,125 +21,26 @@ For the server side lastGLContext points to client2's context.
 
 Signed-off-by: Guilherme Quentel Melo <gqmelo@gmail.com>
 ---
- glx/glxcmds.c | 20 ++++++++++++++++++--
- glx/glxext.c  | 18 +++++++++++++++---
- 2 files changed, 33 insertions(+), 5 deletions(-)
+ glx/glxext.c | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-diff --git a/glx/glxcmds.c b/glx/glxcmds.c
-index 561faeb..ffc6e9b 100644
---- a/glx/glxcmds.c
-+++ b/glx/glxcmds.c
-@@ -188,6 +188,11 @@ validGlxDrawable(ClientPtr client, XID id, int type, int access_mode,
- void
- __glXContextDestroy(__GLXcontext * context)
- {
-+    __GLXcontext *lastglxc;
-+    if (lastGLContext != NULL && lastGLContext != context) {
-+        lastglxc = (__GLXcontext*)lastGLContext;
-+        (*lastglxc->loseCurrent) (lastglxc);
-+    }
-     lastGLContext = NULL;
- }
- 
-@@ -563,7 +568,7 @@ DoMakeCurrent(__GLXclientState * cl,
- {
-     ClientPtr client = cl->client;
-     xGLXMakeCurrentReply reply;
--    __GLXcontext *glxc, *prevglxc;
-+    __GLXcontext *glxc, *prevglxc, *lastglxc = NULL;
-     __GLXdrawable *drawPriv = NULL;
-     __GLXdrawable *readPriv = NULL;
-     int error;
-@@ -659,13 +664,24 @@ DoMakeCurrent(__GLXclientState * cl,
-         if (!(*prevglxc->loseCurrent) (prevglxc)) {
-             return __glXError(GLXBadContext);
-         }
--        lastGLContext = NULL;
-         if (!prevglxc->isDirect) {
-             prevglxc->drawPriv = NULL;
-             prevglxc->readPriv = NULL;
-         }
-     }
- 
-+    /*
-+     ** lastGLContext may be different than prevglxc, so we need lose it to
-+     ** avoid a memory leak
-+     */
-+    if (lastGLContext != NULL) {
-+        lastglxc = (__GLXcontext*)lastGLContext;
-+        if (!lastglxc->isDirect && lastglxc != prevglxc) {
-+            (*lastglxc->loseCurrent) (lastglxc);
-+        }
-+        lastGLContext = NULL;
-+    }
-+
-     if ((glxc != 0) && !glxc->isDirect) {
- 
-         glxc->drawPriv = drawPriv;
 diff --git a/glx/glxext.c b/glx/glxext.c
-index e41b881..b4fab20 100644
+index e41b881..c201fba 100644
 --- a/glx/glxext.c
 +++ b/glx/glxext.c
-@@ -117,7 +117,7 @@ static int glxBlockClients;
- static Bool
- DrawableGone(__GLXdrawable * glxPriv, XID xid)
- {
--    __GLXcontext *c, *next;
-+    __GLXcontext *c, *next, *lastglxc;
- 
-     if (glxPriv->type == GLX_DRAWABLE_WINDOW) {
-         /* If this was created by glXCreateWindow, free the matching resource */
-@@ -139,6 +139,10 @@ DrawableGone(__GLXdrawable * glxPriv, XID xid)
-             c->hasUnflushedCommands = GL_FALSE;
-             /* just force a re-bind the next time through */
-             (*c->loseCurrent) (c);
-+            if (lastGLContext != NULL && lastGLContext != c) {
-+                lastglxc = (__GLXcontext*)lastGLContext;
-+                (*lastglxc->loseCurrent) (lastglxc);
-+            }
-             lastGLContext = NULL;
-         }
-         if (c->drawPriv == glxPriv)
-@@ -280,7 +284,7 @@ glxClientCallback(CallbackListPtr *list, void *closure, void *data)
-     NewClientInfoRec *clientinfo = (NewClientInfoRec *) data;
-     ClientPtr pClient = clientinfo->client;
-     __GLXclientState *cl = glxGetClient(pClient);
--    __GLXcontext *c, *next;
-+    __GLXcontext *c, *next, *lastglxc;
- 
-     switch (pClient->clientState) {
-     case ClientStateRunning:
-@@ -293,6 +297,10 @@ glxClientCallback(CallbackListPtr *list, void *closure, void *data)
-             next = c->next;
-             if (c->currentClient == pClient) {
-                 c->loseCurrent(c);
-+                if (lastGLContext != NULL && lastGLContext != c) {
-+                    lastglxc = (__GLXcontext*)lastGLContext;
-+                    (*lastglxc->loseCurrent) (lastglxc);
-+                }
-                 lastGLContext = NULL;
-                 c->currentClient = NULL;
-                 FreeResourceByType(c->id, __glXContextRes, FALSE);
-@@ -434,7 +442,7 @@ GlxExtensionInit(void)
- __GLXcontext *
- __glXForceCurrent(__GLXclientState * cl, GLXContextTag tag, int *error)
- {
--    __GLXcontext *cx;
-+    __GLXcontext *cx, *lastglxc = NULL;
- 
-     /*
-      ** See if the context tag is legal; it is managed by the extension,
-@@ -469,6 +477,10 @@ __glXForceCurrent(__GLXclientState * cl, GLXContextTag tag, int *error)
+@@ -469,6 +469,12 @@ __glXForceCurrent(__GLXclientState * cl, GLXContextTag tag, int *error)
  
      /* Make this context the current one for the GL. */
      if (!cx->isDirect) {
-+        if (lastGLContext != NULL) {
-+            lastglxc = (__GLXcontext*)lastGLContext;
-+            (*lastglxc->loseCurrent) (lastglxc);
-+        }
++        /*
++         * If it is being forced, it means that this context was already made
++         * current. So it cannot just be made current again without decrementing
++         * refcount's
++         */
++        (*cx->loseCurrent) (cx);
          lastGLContext = cx;
          if (!(*cx->makeCurrent) (cx)) {
              /* Bind failed, and set the error code.  Bummer */
 -- 
-2.5.0
+2.7.4
 
