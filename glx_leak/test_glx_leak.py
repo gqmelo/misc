@@ -1,8 +1,7 @@
 import pexpect
 import os
 
-env = os.environ.copy()
-env['LIBGL_ALWAYS_INDIRECT'] = 1
+os.environ['LIBGL_ALWAYS_INDIRECT'] = '1'
 
 glx_process_1 = pexpect.spawn('./quad')
 glx_process_2 = pexpect.spawn('./quad')
