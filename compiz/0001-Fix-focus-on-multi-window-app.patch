@@ -1,0 +1,30 @@
+From 1f9f55e992cab3af3a321b85cc8234544f557a56 Mon Sep 17 00:00:00 2001
+From: Guilherme Quentel Melo <guilherme@esss.com.br>
+Date: Thu, 12 May 2016 11:36:23 -0300
+Subject: [PATCH] Fix focus on multi window app
+
+---
+ src/event.cpp | 7 +------
+ 1 file changed, 1 insertion(+), 6 deletions(-)
+
+diff --git a/src/event.cpp b/src/event.cpp
+index 9799a19..fb382b2 100644
+--- a/src/event.cpp
++++ b/src/event.cpp
+@@ -2288,12 +2288,7 @@ static const unsigned short _NET_WM_STATE_TOGGLE = 2;
+ 		    {
+ 			privateScreen.orphanData.activeWindow = None;
+ 
+-			if (event->xfocus.detail == NotifyDetailNone ||
+-			    (event->xfocus.mode == NotifyNormal &&
+-			     event->xfocus.detail == NotifyInferior))
+-			{
+-			    screen->focusDefaultWindow ();
+-			}
++
+ 		    }
+ 		}
+ 
+-- 
+2.6.4
+
