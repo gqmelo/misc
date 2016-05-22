@@ -1,40 +1,35 @@
 [core]
-    fscache = true
-    autocrlf = false
-    editor = vim
-    preloadindex = true
+	fscache = true
+	autocrlf = input
+	editor = vim
+	preloadindex = true
 [http]
-    postbuffer = 524288000
+	postbuffer = 524288000
 [push]
-    default = current
+	default = current
 [user]
-    name = Guilherme Quentel Melo
-    email = gqmelo@gmail.com
+	name = Guilherme Quentel Melo
+	email = gqmelo@gmail.com
 [credential]
-    helper = cache --timeout 3600
+	helper = cache --timeout 3600
 [rebase]
-    autosquash = true
+	autosquash = true
 [alias]
-    lgg = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)'
-    lgo = log --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)'
-    ldiff = log --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' master..HEAD
-    ri = !sh ~/Projects/guilherme/git/rebase_interactive.sh
-    rmaster = rebase master --ignore-date
-    cbase = !sh ~/workspace/misc/git/checkout_merge_base.sh
-    co = !sh ~/workspace/misc/git/git_co_regex.sh
-    lg = log --decorate --oneline --color -n10
-    st = status -s -b
-[mu-repo]
-    remote-base-url = ssh://git@eden.fln.esss.com.br:7999/esss
-
-
-
+	lgg = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)'
+	lgo = log --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)'
+	ldiff = log --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' master..HEAD
+	ri = !sh ~/workspace/misc/git/rebase_interactive.sh
+	rmaster = rebase master --ignore-date
+	cbase = !sh ~/workspace/misc/git/checkout_merge_base.sh
+	co = !sh ~/workspace/misc/git/git_co_regex.sh
+	lg = log --decorate --oneline --color -n10
+	st = status -s -b
 [sendemail]
-    from = Guilherme Quentel Melo <gqmelo@gmail.com>
-    smtpserver = smtp.gmail.com
-    smtpuser = gqmelo@gmail.com
-    smtpencryption = ssl
-    chainreplyto = false
-    smtpserverport = 465
+	from = Guilherme Quentel Melo <gqmelo@gmail.com>
+	smtpserver = smtp.gmail.com
+	smtpuser = gqmelo@gmail.com
+	smtpencryption = ssl
+	chainreplyto = false
+	smtpserverport = 465
 [pull]
-    rebase = true
+	rebase = true
