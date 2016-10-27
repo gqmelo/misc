@@ -55,7 +55,7 @@ def main(args):
     data = {
         "name": view_name,
         "useincluderegex": "on",
-        "includeRegex": ".*-{}-.*".format(view_name),
+        "includeRegex": ".*{}.*".format(view_name),
         "json": json.dumps(
             {
                 "name": view_name,
