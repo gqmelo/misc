@@ -1,0 +1,19 @@
+xontrib load apt_tabcomplete
+#$PROMPT='{env_name}{BOLD_GREEN}{user}@{hostname}{BOLD_CYAN} {cwd}{branch_color}{curr_branch}{NO_COLOR} {BOLD_CYAN}{prompt_end}{NO_COLOR} '
+$XONSH_COLOR_STYLE = 'native'
+$VC_BRANCH_TIMEOUT = 1.0
+$XONSH_SHOW_TRACEBACK=True
+
+def _alert(args, stdin=None):
+    ret = _.rtn
+    if ret != 0:
+        result = 'error'
+    else:
+        result = 'success'
+    import os
+    msg = 'pwd: {}\n'.format(os.getcwd())
+    msg += 'cmd: {}'.format(str(_.executed_cmd))
+    $(notify-send @(result) @(msg))
+
+aliases['alert'] = _alert
+
