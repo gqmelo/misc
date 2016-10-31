@@ -8,6 +8,9 @@ from algorithms.chapter_01_arrays_and_strings.q06_string_compression import \
     compressed_string
 from algorithms.chapter_01_arrays_and_strings.q07_rotate_matrix import \
     rotate_matrix
+from algorithms.chapter_01_arrays_and_strings.q08_zero_matrix import zero_matrix
+from algorithms.chapter_01_arrays_and_strings.q09_string_rotation import \
+    is_rotation
 from algorithms.strings import has_unique_chars, is_permutation, urlify
 
 
@@ -182,3 +185,56 @@ def test_rotate_matrix(matrix, expected):
         obtained.append(''.join(line))
 
     assert '\n'.join(obtained) == expected
+
+
+@pytest.mark.parametrize(
+    'matrix,expected',
+    [
+        ('0', '0'),
+        ('1', '1'),
+        ('01\n11', '00\n01'),
+        ('11\n10', '10\n00'),
+        ('11\n11', '11\n11'),
+        ('101\n111\n111', '000\n101\n101'),
+    ]
+)
+def test_zero_matrix(matrix, expected):
+    matrix_as_lists = []
+    for line in matrix.splitlines():
+        matrix_as_lists.append([int(c) for c in line])
+
+    zero_matrix(matrix_as_lists) == expected
+
+    obtained = []
+    for line in matrix_as_lists:
+        obtained.append(''.join([str(c) for c in line]))
+
+    assert '\n'.join(obtained) == expected
+
+
+@pytest.mark.parametrize(
+    'a,b',
+    [
+        ('', ''),
+        ('a', 'a'),
+        ('ab', 'ab'),
+        ('ab', 'ba'),
+        ('waterbottle', 'erbottlewat'),
+    ]
+)
+def test_is_rotation(a, b):
+    assert is_rotation(a, b)
+
+
+@pytest.mark.parametrize(
+    'a,b',
+    [
+        ('ab', ''),
+        ('aa', 'bb'),
+        ('abc', 'acb'),
+        ('asdv', 'cba'),
+        ('waterbottle', 'rbottlewat'),
+    ]
+)
+def test_is_not_rotation(a, b):
+    assert not is_rotation(a, b)
