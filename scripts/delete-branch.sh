@@ -7,4 +7,4 @@ if [ -z "$BRANCH" ]; then
 fi
 
 set +x
-mu branch -d "$BRANCH" && mu push --delete origin "$BRANCH" && remove-jenkins-view.py -n "$BRANCH"
+mu branch -d "$BRANCH" && mu push --delete origin "$BRANCH"
