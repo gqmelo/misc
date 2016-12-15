@@ -4,8 +4,13 @@ function fish_prompt --description 'Write out the prompt'
 	# If commands runs >= 10 seconds, notify user on completion
 	if test $CMD_DURATION
 		if test $CMD_DURATION -gt (math "1000 * 10")
+			if test $last_status -ne 0
+				set notify_icon 'dialog-error'
+			else
+				set notify_icon 'emblem-default'
+			end
 			set secs (math "$CMD_DURATION / 1000")
-			notify-send "$history[1]" "Returned $last_status, took $secs seconds"
+			notify-send -i $notify_icon "$history[1]" "Returned $last_status, took $secs seconds"
 		end
 	end
 
