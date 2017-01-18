@@ -7,4 +7,4 @@ if [ -z "$BRANCH" ]; then
 fi
 
 set +x
-git branch -d "$BRANCH" && mu push --delete origin "$BRANCH"
+git branch -d "$BRANCH" && git push --delete origin "$BRANCH"
