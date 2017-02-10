@@ -11,6 +11,8 @@ function fish_prompt --description 'Write out the prompt'
 			end
 			set secs (math "$CMD_DURATION / 1000")
 			notify-send -i $notify_icon "$history[1]" "Returned $last_status, took $secs seconds"
+			# Avoid repeating the message (when the window is resized for example)
+			set -gx CMD_DURATION 0
 		end
 	end
 
