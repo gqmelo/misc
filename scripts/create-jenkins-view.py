@@ -73,7 +73,7 @@ def main(args):
         )
     }
     if send_request(config_url, username, password, data=data, headers=headers):
-        print("Created view {}".format(view_url))
+        print("Created view:\n\n{}".format(view_url))
 
 
 def send_request(url, user, password, **kwargs):
