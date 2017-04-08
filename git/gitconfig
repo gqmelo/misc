@@ -27,7 +27,8 @@
 	btpr = !sh ~/workspace/misc/git/open-bitbucket-pr.sh
 	nb = !sh ~/workspace/misc/git/create-branch-and-push-origin.sh
 	db = !sh ~/workspace/misc/git/delete-branch-and-push-origin.sh
-	int = !sh ~/workspace/misc/git/interact.sh
+	fshow = !sh ~/workspace/misc/git/fzf-git-show.sh
+	fldiff = !sh ~/workspace/misc/git/fzf-git-ldiff.sh
 [sendemail]
 	from = Guilherme Quentel Melo <gqmelo@gmail.com>
 	smtpserver = smtp.gmail.com
