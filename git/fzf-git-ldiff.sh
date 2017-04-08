@@ -1,7 +1,7 @@
 #!/bin/sh
 
 fzf_git_ldiff() {
-    fzf -0 --ansi --multi --preview-window=up \
+    fzf -0 --reverse --ansi --multi --preview-window=up \
         --preview="echo {} | sed -r ""'""s,^[|\\/* ]+([0-9a-zA-Z]|$),\1,""'"" | awk ""'""{print \$1}""' | xargs git ldiff" \
     | sed -r 's,^[|\\/* ]+([0-9a-zA-Z]|$),\1,' \
     | awk '{print $1}'
