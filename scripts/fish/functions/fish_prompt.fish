@@ -3,6 +3,10 @@ function fish_prompt --description 'Write out the prompt'
 	# Show notification if the last command took too much time
 	long_command_notify
 
+	if set -q VIRTUAL_ENV
+		set virtualenv (set_color -b blue white) "(" (basename "$VIRTUAL_ENV") ")" (set_color normal)" "
+	end
+
 	# Just calculate this once, to save a few cycles when displaying the prompt
 	if not set -q __fish_prompt_hostname
 		set -g __fish_prompt_hostname (hostname|cut -d . -f 1)
@@ -67,7 +71,8 @@ function fish_prompt --description 'Write out the prompt'
 		set prompt_status ' ' (set_color $fish_color_status) "[$last_status]" "$normal"
 	end
 
-    set -g __fish_git_prompt_show_informative_status 1
-    set -g __fish_git_prompt_showcolorhints 1
-	echo -n -s (set_color normal) [(date +%X)] ' ' (set_color $fish_color_user) "$USER" $normal @ (set_color $fish_color_host) "$__fish_prompt_hostname" $normal ' ' (set_color $color_cwd) (prompt_pwd) $normal (__fish_vcs_prompt) $normal $prompt_status "> "
+	set -g __fish_git_prompt_show_informative_status 1
+	set -g __fish_git_prompt_showcolorhints 1
+
+	echo -n -s (set_color normal) $virtualenv [(date +%X)] ' ' (set_color $fish_color_user) "$USER" $normal @ (set_color $fish_color_host) "$__fish_prompt_hostname" $normal ' ' (set_color $color_cwd) (prompt_pwd) $normal (__fish_vcs_prompt) $normal $prompt_status "> "
 end
