@@ -2,6 +2,7 @@
 
 unset FZF_DEFAULT_OPTS
 #export FZF_DEFAULT_OPTS='--bind alt-j:preview-page-down --bind alt-k:preview-page-up --bind ctrl-l:select-all --bind ctrl-n:deselect-all'
+export FZF_CTRL_T_OPTS='--bind "enter:execute(echo -n {+} | xargs copy-path-to-clipboard)+accept"'
 
 # Show history with fzf e copy the selection to clipboard
 bind -x '"\er": "history | tac | fzf -m | xsel -b"'

@@ -1,0 +1,6 @@
+#!/bin/sh
+
+# Copy relative path to primary
+echo -n "$@" | xsel -i
+# Copy absolute path to clipboard
+readlink -f "$@" | xargs echo -n | xsel -i -b
