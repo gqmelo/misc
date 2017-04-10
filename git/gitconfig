@@ -17,7 +17,7 @@
 [alias]
 	lgg = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)'
 	lgo = log --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)'
-	ldiff = log --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' master..HEAD
+	ldiff = !sh ~/workspace/misc/git/log-diff.sh
 	ri = !sh ~/workspace/misc/git/rebase-interactive.sh
 	rmaster = rebase master --ignore-date
 	cbase = !sh ~/workspace/misc/git/checkout-merge-base.sh
