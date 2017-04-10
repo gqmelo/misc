@@ -1,2 +1,2 @@
 . ~/miniconda3/etc/fish/conf.d/conda.fish
-. ~/.config/fish/config_custom.fish
+. ~/workspace/misc/scripts/fish/config_custom.fish
