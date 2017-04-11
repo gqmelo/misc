@@ -1,0 +1,11 @@
+#!/bin/sh
+
+# This filters lines obtained from git log like:
+# * 06ce799 - (4 weeks ago) Change foo - Someone
+# * 08eb055 - (4 weeks ago) Change bar - Someone else
+# to get only the ref hash
+
+# Copy filtered ref to primary
+echo -n "$@" | sed -r 's,^[|\\/* ]+([0-9a-zA-Z]|$),\1,' | cut -d ' ' -f1 | tr '\n' ' '| xsel -i
+# Copy whole line to clipboard
+echo -n "$@" | xsel -i -b

@@ -1,10 +1,12 @@
 #!/bin/sh
 
 fzf_git_ldiff() {
+    filter="sed -r ""'""s,^[|\\/* ]+([0-9a-zA-Z]|$),\1,""'"" | cut -d ""'"" ""'"" -f1"
     fzf -0 --reverse --ansi --multi --preview-window=up \
-        --preview="echo {} | sed -r ""'""s,^[|\\/* ]+([0-9a-zA-Z]|$),\1,""'"" | awk ""'""{print \$1}""' | xargs git ldiff" \
+        --preview="echo {} | $filter | xargs git ldiff" \
+        --bind "enter:execute(echo -n {+} | xargs copy-git-ref-to-clipboard)+accept" \
     | sed -r 's,^[|\\/* ]+([0-9a-zA-Z]|$),\1,' \
-    | awk '{print $1}'
+    | cut -d ' ' -f1 | tr '\n' ' '
 }
 
 if [ -t 0 ]; then

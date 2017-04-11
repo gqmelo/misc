@@ -4,4 +4,4 @@ set -gx FZF_CTRL_T_OPTS '--bind "enter:execute(echo -n {+} | xargs copy-path-to-
 fzf_key_bindings
 
 # Show history with fzf and copy the selection to clipboard
-bind \er "history | fzf -m | xsel -b"
+bind \er "history | fzf -m --bind enter:accept | xsel -i -b"
