@@ -5,7 +5,7 @@ export FZF_DEFAULT_OPTS='--bind alt-j:preview-page-down --bind alt-k:preview-pag
 export FZF_CTRL_T_OPTS='--bind "enter:execute(echo -n {+} | xargs copy-path-to-clipboard)+accept"'
 
 # Show history with fzf e copy the selection to clipboard
-bind -x '"\er": "history | tac | fzf -m | xsel -b"'
+bind -x '"\C-x\C-r": "history | tac | fzf -m | xsel -b"'
 
 # Binds for git refs
 bind '"\C-g\C-b": " \C-u \C-a\C-k`git fshow branch`\e\C-e\C-y\C-a\C-y\ey\C-h\C-e\er \C-h"'
