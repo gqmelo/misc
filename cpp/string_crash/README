@@ -1,0 +1,69 @@
+
+This is what I've done:
+
+- Rebuilt stock gcc 4.8.5 and 5.1.0 on CentOS 6 without stripping binaries
+- Created a dummy FooEngineBuilder on llvm/ExecutionEngine/ExecutionEngine.h
+- Rebuilt both mesa and llvm-mesa-private on CentOS 7 with gcc 4.8.5 and debug
+symbols
+
+FooEngineBuilder is just a class with a std::string member and two methods to
+set the string:
+
+    class FooEngineBuilder {
+    private:
+      std::string MCPU;
+    public:
+      FooEngineBuilder &setMCPUFromHeader() {
+        std::string mymcpu;
+        mymcpu = "my_mcpu";
+        MCPU.assign(mymcpu.begin(), mymcpu.end());
+      }
+      FooEngineBuilder &setMCPUFromSource();
+    };
+
+Using this class on mesa this crashes:
+
+    FooEngineBuilder foo_builder;
+    foo_builder.setMCPUFromHeader();
+
+and this does not:
+
+    FooEngineBuilder foo_builder;
+    foo_builder.setMCPUFromSource();
+
+What happens is that MCPU is an empty string pointing to
+std::string::_Rep::_S_empty_rep_storage defined on the static libstdc++
+(gcc 4.8.5). When assigning MCPU from the header, the _M_dispose method
+from the dynamic library (gcc 5.1.0) is called.
+
+_M_dispose only destroy the string if it's not a reference to
+std::string::_Rep::_S_empty_rep_storage:
+
+    if (__builtin_expect(this != &_S_empty_rep(), false))
+
+The problem is that *this* is pointing to a different
+std::string::_Rep::_S_empty_rep_storage than &_S_empty_rep(), making
+_M_dispose try to delete a static std::string member.
+
+In summary the problem is that static variables are being defined twice,
+exactly why STB_GNU_UNIQUE was created:
+
+https://www.redhat.com/archives/posix-c++-wg/2009-August/msg00002.html
+
+The llvm library is correctly defining the symbols as unique:
+
+    $ objdump -C -T /usr/lib64/libLLVM-3.8-mesa.so | grep _S_empty_rep_st>
+    000000000405be20 u    DO .bss   0000000000000020  Base        std::string::_Rep::_S_empty_rep_storage
+    000000000405bde0 u    DO .bss   0000000000000020  Base        std::basic_string<wchar_t, std::char_traits<wchar_t>, std::allocator<wchar_t> >::_Rep::_S_empty_rep_storage
+
+But the libstdc++ compiled on CentOS 6 is not:
+
+    $ objdump -C -T $LIBSTDCXX5 | grep _S_empty_rep_storage
+    000000000038c300 g    DO .bss   0000000000000020  GLIBCXX_3.4 std::string::_Rep::_S_empty_rep_storage
+    000000000038c320 g    DO .bss   0000000000000020  GLIBCXX_3.4 std::basic_string<wchar_t, std::char_traits<wchar_t>, std::allocator<wchar_t> >::_Rep::_S_empty_rep_storage
+
+So in conclusion when building gcc I need to make sure that libstdc++.so is
+defining STB_GNU_UNIQUE symbols.
+
+Maybe this should be mentioned on some gcc/libstdc++ docs related to binary
+compatibility?
