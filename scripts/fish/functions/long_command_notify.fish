@@ -8,7 +8,12 @@ function long_command_notify --description 'Show a desktop notification dependin
 			set notify_icon 'emblem-default'
 		end
 		set secs (math "$CMD_DURATION / 1000")
-		notify-send -i $notify_icon "$history[1]" "Returned $last_status, took $secs seconds"
+		switch (uname)
+			case Linux
+				notify-send -i $notify_icon "$history[1]" "Returned $last_status, took $secs seconds"
+			case Darwin
+				osascript -e "display notification \"Returned $last_status, took $secs seconds\" with title \"$history[1]\""
+		end
 		# Avoid repeating the message (when the window is resized for example)
 		set -gx CMD_DURATION 0
 	end
