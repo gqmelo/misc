@@ -1,6 +1,13 @@
-#!/bin/sh
+#!/bin/bash
 
-# Copy relative path to primary
-echo -n "$@" | xsel -i
-# Copy absolute path to clipboard
-readlink -f "$@" | xargs echo -n | xsel -i -b
+if [ $(uname) = "Linux" ]; then
+  # Copy relative path to primary
+  echo -n "$@" | xsel -i
+  # Copy absolute path to clipboard
+  readlink -f "$@" | xargs echo -n | xsel -i -b
+elif [ $(uname) = "Darwin" ]; then
+  # Copy absolute path first to add to clipboard history
+  grealpath "$@" | xargs echo -n | pbcopy
+  # Copy relative path to primary
+  echo -n "$@" | pbcopy
+fi
