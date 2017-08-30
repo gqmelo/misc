@@ -112,7 +112,6 @@ s0_outline_color = #e6e6e6ff
 [core]
 s0_active_plugins = core;composite;opengl;place;commands;session;workarounds;copytex;snap;move;compiztoolbox;imgpng;mousepoll;vpswitch;regex;grid;scale;extrawm;resize;wall;expo;unitymtgrabhandles;ezoom;unityshell;
 s0_audible_bell = false
-s0_outputs = 3440x1440+0+0;
 s0_autoraise = false
 s0_autoraise_delay = 500
 s0_show_desktop_key = <Control><Super>d
