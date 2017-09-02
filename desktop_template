@@ -1,0 +1,9 @@
+# http://unix.stackexchange.com/questions/144422/getting-the-current-path-in-desktop-exec-command
+[Desktop Entry]
+Name=__EXECUTABLE_NAME__
+Comment=
+Exec=sh -c '`dirname $1`/__EXECUTABLE_NAME__' dummy %k
+Icon=
+Terminal=false
+Type=Application
+StartupNotify=true
