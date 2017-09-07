@@ -1,3 +1,5 @@
+. ~/miniconda3/etc/fish/conf.d/conda.fish
+
 if not contains ~/workspace/misc/bin $fish_user_paths
     set -U fish_user_paths ~/workspace/misc/bin $fish_user_paths
 end
