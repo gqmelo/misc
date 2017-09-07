@@ -51,6 +51,11 @@ function fish_prompt --description 'Write out the prompt'
 		end
 	end
 
+	# fish version available on Ubuntu 16.04 has no __fish_vcs_prompt function
+	if not functions -q __fish_vcs_prompt
+		functions -c __fish_git_prompt __fish_vcs_prompt
+	end
+
 	set -l color_cwd
 	set -l prefix
 	switch $USER
