@@ -16,6 +16,8 @@ s0_audible_bell = false
 s0_autoraise = false
 s0_autoraise_delay = 500
 s0_show_desktop_key = <Control><Super>d
+s0_hsize = 2
+s0_vsize = 2
 
 [decor]
 s0_active_shadow_color = #00000080
@@ -33,6 +35,8 @@ s0_close_matches = ((type=Normal | Unknown) | name=sun-awt-X11-XFramePeer | name
 s0_unminimize_effects = animation:Glide 2;
 
 [rotate]
+s0_rotate_left_key = <Shift><Alt>Left
+s0_rotate_right_key = <Shift><Alt>Right
 s0_rotate_to_1_key = <Super>Home
 s0_rotate_to_1_window_key = <Shift><Super>Home
 
@@ -108,8 +112,10 @@ s0_run_command_terminal_key = <Control><Alt>t
 s0_thumb_highlight_gradient_shadow_color = #dfdfdfff
 s0_arrow_base_color = #e6e6e6d9
 s0_arrow_shadow_color = #dcdcdcd9
-s0_up_key = Disabled
-s0_down_key = Disabled
+s0_left_key = <Shift><Alt>Left
+s0_right_key = <Shift><Alt>Right
+s0_up_key = <Shift><Alt>Up
+s0_down_key = <Shift><Alt>Down
 
 [opengl]
 s0_texture_filter = 0
@@ -138,4 +144,3 @@ s0_selection_fill_color = #2f2f4f4f
 [commands]
 s0_command0 = /usr/bin/zeal
 s0_run_command0_key = <Control>F1
-
