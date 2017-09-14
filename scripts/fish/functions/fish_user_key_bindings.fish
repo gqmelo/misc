@@ -14,6 +14,6 @@ bind \cg\cr "git fshow branch -a | $read_command"
 bind \cg\ct "git fshow tag --sort -version:refname | $read_command"
 bind \cg\ch "git fshow lgg --all | $read_command"
 
-if test -e ~/workspace/misc-amazon/scripts/fish/fish_user_key_bindings.fish
-    . ~/workspace/misc-amazon/scripts/fish/fish_user_key_bindings.fish
+if test -e ~/workspace/Guilmelo/scripts/fish/fish_user_key_bindings.fish
+	. ~/workspace/Guilmelo/scripts/fish/fish_user_key_bindings.fish
 end
