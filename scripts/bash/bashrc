@@ -119,6 +119,6 @@ fi
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 source ~/workspace/misc/scripts/bash/bashrc_common
-if [ -f ~/workspace/Guilmelo/scripts/fish/bashrc_work ]; then
-  source ~/workspace/Guilmelo/scripts/fish/bashrc_work
+if [ -f ~/workspace/Guilmelo/scripts/bash/bashrc_work ]; then
+  source ~/workspace/Guilmelo/scripts/bash/bashrc_work
 fi
