@@ -2,6 +2,8 @@
 
 if [ ! -z "$1" ]; then
     BRANCH="$1"
+elif git rev-parse origin/mainline > /dev/null 2>&1; then
+    BRANCH="origin/mainline"
 else
     BRANCH="origin/master"
 fi

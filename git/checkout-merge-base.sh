@@ -2,6 +2,8 @@
 
 if [ ! -z "$1" ]; then
     MERGE_BASE_BRANCH="$1"
+elif git rev-parse mainline; then
+    MERGE_BASE_BRANCH="mainline"
 else
     MERGE_BASE_BRANCH="master"
 fi
