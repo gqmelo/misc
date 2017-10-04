@@ -143,4 +143,7 @@ s0_selection_fill_color = #2f2f4f4f
 
 [commands]
 s0_command0 = /usr/bin/zeal
-s0_run_command0_key = <Control>F1
+s0_command1 = /usr/bin/killall gulp
+s0_run_command0_key = <Super>F1
+s0_run_command1_key = <Super>F2
+
