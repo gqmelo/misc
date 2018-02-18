@@ -1,0 +1,5 @@
+#Sun Feb 18 16:33:32 SAST 2018
+\!/=
+/instance/org.eclipse.ui.workbench/org.eclipse.ui.commands=<?xml version\="1.0" encoding\="UTF-8"?>\n<org.eclipse.ui.commands>\n<keyBinding commandId\="org.eclipse.compare.copyRightToLeft" contextId\="org.eclipse.ui.contexts.window" keyConfigurationId\="org.eclipse.ui.defaultAcceleratorConfiguration" keySequence\="ALT+CTRL+,"/>\n<keyBinding commandId\="org.eclipse.compare.selectPreviousChange" contextId\="org.eclipse.ui.contexts.window" keyConfigurationId\="org.eclipse.ui.defaultAcceleratorConfiguration" keySequence\="CTRL+SHIFT+,"/>\n<keyBinding commandId\="org.eclipse.compare.selectNextChange" contextId\="org.eclipse.ui.contexts.window" keyConfigurationId\="org.eclipse.ui.defaultAcceleratorConfiguration" keySequence\="CTRL+SHIFT+."/>\n<keyBinding commandId\="org.eclipse.compare.copyLeftToRight" contextId\="org.eclipse.ui.contexts.window" keyConfigurationId\="org.eclipse.ui.defaultAcceleratorConfiguration" keySequence\="ALT+CTRL+."/>\n</org.eclipse.ui.commands>
+@org.eclipse.ui.workbench=3.110.1.v20170704-1208
+file_export_version=3.0
