@@ -1,1 +1,1 @@
-/home/saddan/workspace/fzf/shell/key-bindings.fish
+/home/ANT.AMAZON.COM/guilmelo/.fzf/shell/key-bindings.fish
