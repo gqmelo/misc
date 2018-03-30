@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DOTFILES_DIR=$(dirname ${BASH_SOURCE[0]})
+DOTFILES_DIR=$(readlink -f $(dirname ${BASH_SOURCE[0]}))
 
 echo "Installing files from '$DOTFILES_DIR'"
 
