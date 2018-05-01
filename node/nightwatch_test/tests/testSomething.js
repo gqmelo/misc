@@ -53,5 +53,12 @@ describe('Google demo test for Mocha', function() {
       client.goToGoogleAndSearch();
       console.log('Called goToGoogleAndSearch command');
     });
+
+    it('opens google page and search with inner command', function(client) {
+      console.log('Calling goToGoogleAndSearchWithInnerCommand command');
+      // Same results as the test without custom commands
+      client.goToGoogleAndSearchWithInnerCommand();
+      console.log('Called goToGoogleAndSearchWithInnerCommand command');
+    });
   });
 });
