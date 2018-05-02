@@ -1,29 +1,20 @@
-var util = require('util');
-var events = require('events');
-
-function ThrowErrorAndCatch() {
-  events.EventEmitter.call(this);
+var wrapper = function(fn) {
+  return function() {
+    try {
+      fn();
+    } catch(err) {
+      console.log(`Caught error: ${err}\n\n${err.stack}`);
+      this.end(function() {
+        throw Error('Caugth error inside a custom command');
+      }.bind(this));
+    }
+  }
 }
 
-util.inherits(ThrowErrorAndCatch, events.EventEmitter);
-
-ThrowErrorAndCatch.prototype.command = function(cb) {
-  var self = this;
-
-  console.log(`Number of errors: ${this.client.results.errors}`);
-  // This does not work. The test still pass
-  this.client.results.errors += 1;
-  console.log(`Number of errors: ${this.client.results.errors}`);
-  this.perform(function() {
-    if (cb) {
-      cb.call(self.client.api);
-    }
-    self.emit('complete');
-    console.log(`Called complete`);
-  });
-  return this.client.api;
-};
-
-module.exports = ThrowErrorAndCatch;
-
-
+exports.command = wrapper(function() {
+  console.log('ThrowErrorAndCatch command');
+  // This would not make the test fail: https://github.com/nightwatchjs/nightwatch/issues/1527
+  // but the wrapper should catch and then make it fail.
+  nonExisting;
+  console.log('ThrowErrorAndCatch command ended');
+});
