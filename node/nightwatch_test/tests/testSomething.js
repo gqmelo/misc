@@ -60,5 +60,19 @@ describe('Google demo test for Mocha', function() {
       client.goToGoogleAndSearchWithInnerCommand();
       console.log('Called goToGoogleAndSearchWithInnerCommand command');
     });
+
+    it('throws an error', function(client) {
+      console.log('Calling throwError command');
+      // Same results as the test without custom commands
+      client.throwError();
+      console.log('Called throwError command');
+    });
+
+    it('throws an error and catch', function(client) {
+      console.log('Calling throwErrorAndCatch command');
+      // Same results as the test without custom commands
+      client.throwErrorAndCatch();
+      console.log('Called throwErrorAndCatch command');
+    });
   });
 });
