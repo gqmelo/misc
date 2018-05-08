@@ -5,7 +5,7 @@ var wrapper = function(fn) {
     } catch(err) {
       console.log(`Caught error: ${err}\n\n${err.stack}`);
       this.end(function() {
-        throw Error('Caugth error inside a custom command');
+        throw Error('Caught error inside a custom command');
       }.bind(this));
     }
   }
