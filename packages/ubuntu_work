@@ -1,10 +1,13 @@
 amazonchime
+amazon-fonts
 amazon-it-admin
+amazon-phonetool
 amazon-role-pidgin
 amazon-role-thunderbird
 amazon-role-uquarantine
 amazon-scan-nix
 amazon-security-bastion-prod
+amazon-windows-pdx-us-en
 apt-file
 atom
 awscli
@@ -25,6 +28,7 @@ copyq
 dh-autoreconf
 docker-ce
 dropbox
+ekiga
 evolution
 evolution-ews
 evolution-plugins
@@ -48,6 +52,7 @@ indicator-cpufreq
 indicator-multiload
 inkscape
 inotify-tools
+intel-microcode
 intltool
 iotop
 jq
@@ -122,12 +127,15 @@ python-apt
 python-pip
 python-pygments
 ruby
+scala
 screen
+screenruler
 shutter
 sloccount
 smbclient
 spotify-client
 strace
+sysstat
 taniumclient
 terminator
 time
@@ -138,6 +146,7 @@ ubuntu-gnome-wallpapers-xenial
 vim
 virtualbox-5.1
 vlc
+w3m
 winehq-staging
 winetricks
 wireshark-qt
