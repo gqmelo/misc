@@ -30,12 +30,14 @@ docker-compose
 docker.io
 dropbox
 easytag
+entr
 exfat-fuse
 fakechroot
 feh
 ffmpeg
 fish
 five-or-more
+flatpak
 flex
 fluxbox
 fonts-noto-cjk
@@ -153,6 +155,7 @@ libxtst-dev
 libxv-dev
 lightsoff
 linux-tools-common
+linux-tools-generic
 lm-sensors
 meld
 mercurial
@@ -160,9 +163,11 @@ mesa-utils
 metacity
 mir-client-platform-mesa-dev
 mono-complete
+moreutils
 mosh
 mplayer
 nasm
+ncdu
 nethogs
 nettle-dev
 nvidia-driver-396
@@ -174,6 +179,7 @@ phoronix-test-suite
 po-debconf
 progress
 psensor
+pv
 pyotherside
 pypy
 python3-opengl
@@ -203,6 +209,7 @@ quadrapassel
 quilt
 qutebrowser
 rinse
+rlwrap
 rr
 ruby
 ruby-dev
@@ -214,6 +221,7 @@ smbclient
 snapd
 solaar-gnome3
 ssh-askpass
+sshfs
 steam-devices
 steam:i386
 swell-foop
