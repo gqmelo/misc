@@ -15,9 +15,11 @@ banshee
 bash-completion
 bless
 brazilcli
+builder-toolbox
 caffeine
 ccache
 cisco-anyconnect
+clang-format
 clipit
 code
 command-not-found
@@ -116,6 +118,8 @@ network-manager-openconnect
 nodejs
 openconnect
 oracle-java8-installer
+parallel
+perf-tools-unstable
 pidgin
 pidgin-dev
 pidgin-plugin-pack
@@ -150,6 +154,7 @@ w3m
 winehq-staging
 winetricks
 wireshark-qt
+wmctrl
 xmlstarlet
 xserver-xorg-hwe-16.04
 xubuntu-community-wallpapers
