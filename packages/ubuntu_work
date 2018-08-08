@@ -42,6 +42,7 @@ flashplugin-installer
 freerdp2-dev
 gcc-6-base:i386
 git
+git-cola
 gnome-backgrounds
 google-chrome-stable
 gparted
@@ -70,6 +71,7 @@ libbz2-1.0:i386
 libc6-i386
 libc6:i386
 libdbus-glib-1-dev
+libdw1
 libedit2:i386
 libfarstream-0.2-5
 libfarstream-0.2-dev
@@ -142,6 +144,7 @@ strace
 sysstat
 taniumclient
 terminator
+tig
 time
 tk-dev
 tmux
