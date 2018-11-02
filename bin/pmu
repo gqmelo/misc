@@ -1,0 +1,5 @@
+#!/bin/sh
+
+# Run mu commands in parallel
+
+mu set-var serial=0 && mu "$@" && mu set-var serial=1
