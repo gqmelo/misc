@@ -1,6 +1,9 @@
 import pytest
 import time
+from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support import expected_conditions
+from selenium.webdriver.support.ui import WebDriverWait
 
 
 @pytest.fixture
@@ -10,7 +13,7 @@ def selenium(selenium):
     # time.sleep(100)
 
 
-def test_something(selenium):
+def test_search_on_google(selenium):
     selenium.get("https://www.google.com")
     element = selenium.find_element_by_css_selector("input[type=text]")
     element.screenshot("/tmp/element1.png")
@@ -25,3 +28,18 @@ def test_something(selenium):
     element.send_keys(Keys.ENTER)
     main_element = selenium.find_element_by_id("main")
     assert "pytest" in main_element.text
+
+
+def test_feeling_lucky(selenium):
+    wait = WebDriverWait(selenium, 30)
+    
+    selenium.get("https://www.google.com")
+    element = wait.until(
+        expected_conditions.visibility_of_element_located((By.CSS_SELECTOR, ".FPdoLc input[name=btnI]"))
+    )
+
+    element.click()
+
+    element = wait.until(
+        expected_conditions.invisibility_of_element((By.CSS_SELECTOR, ".FPdoLc input[name=btnI]"))
+    )
