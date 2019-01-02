@@ -1,0 +1,10 @@
+LIBDUMMY_1.0 {
+  global:
+    extern "C++" {
+      "FooEngineBuilder::FooEngineBuilder()";
+    };
+
+  local:
+    *;
+
+};
