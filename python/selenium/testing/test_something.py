@@ -6,6 +6,19 @@ from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.ui import WebDriverWait
 
 
+@pytest.fixture(scope="session")
+def logged_session(account, language):
+    print(account, language)
+    yield {}
+
+
+def test_parametrization_1(logged_session):
+    pass
+
+
+def test_parametrization_2(logged_session):
+    pass
+
 @pytest.fixture
 def selenium(selenium):
     selenium.implicitly_wait(5)
