@@ -43,4 +43,6 @@ async def parent():
             print("parent: spawning receiver...")
             nursery.start_soon(receiver, client_stream)
 
-trio.run(parent)
+
+if __name__ == '__main__':
+    trio.run(parent)
