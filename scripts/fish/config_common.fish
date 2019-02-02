@@ -8,5 +8,5 @@ if not contains ~/bin $PATH
     set -gx PATH ~/bin $PATH
 end
 
-eval (python -m virtualfish)
+eval (python3 -m virtualfish)
 complete --command mu --wraps git
