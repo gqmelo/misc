@@ -1,5 +1,14 @@
 #!/usr/bin/env bash
 
+if ! echo $PATH | grep ~/.cargo/bin > /dev/null; then
+  export PATH="~/.cargo/bin:$PATH"
+fi
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+if ! echo $PATH | grep ~/.rvm/bin > /dev/null; then
+  export PATH="$PATH:~/.rvm/bin"
+fi
+
 unset FZF_DEFAULT_OPTS
 export FZF_DEFAULT_OPTS='--bind alt-j:preview-page-down --bind alt-k:preview-page-up --bind ctrl-l:select-all --bind ctrl-n:deselect-all'
 export FZF_CTRL_T_OPTS='--bind "enter:execute(echo -n {+} | xargs copy-path-to-clipboard)+accept"'

@@ -8,5 +8,9 @@ if not contains ~/bin $PATH
     set -gx PATH ~/bin $PATH
 end
 
+if not contains ~/.cargo/bin $PATH
+    set -gx PATH ~/.cargo/bin $PATH
+end
+
 eval (python3 -m virtualfish)
 complete --command mu --wraps git
