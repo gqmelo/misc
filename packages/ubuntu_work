@@ -1,5 +1,6 @@
 adobe-flashplugin
 albert
+amazonchime
 amazon-fonts
 amazon-it-admin
 amazon-phonetool
@@ -20,6 +21,7 @@ clipit
 code
 connections-disco-agent
 dh-autoreconf
+docker.io
 dropbox
 evolution
 evolution-dev
@@ -27,6 +29,7 @@ evolution-ews
 evolution-plugins
 exfat-fuse
 exfat-utils
+falcon-sensor
 finch
 fish
 flameshot
@@ -39,14 +42,20 @@ gir1.2-networkmanager-1.0
 git
 git-cola
 gnome-backgrounds
+gnome-calculator
+gnome-clocks
+gnome-dictionary
 gnome-tweaks
+google-chrome-stable
 gparted
 gpick
 graphviz
 gtk-recordmydesktop
+gucharmap
 hardinfo
 iftop
 inkscape
+inotify-tools
 iotop
 jq
 libfarstream-0.2-5
@@ -60,6 +69,7 @@ libmarkdown2-dev
 libopus-dev
 libpam-mount
 libprotobuf-c-dev
+libsensors4-dev
 libtool
 linphone
 linux-tools-common
@@ -72,9 +82,11 @@ nethogs
 net-tools
 openjdk-11-jre-headless
 parallel
+peek
 perf-tools-unstable
 pidgin
 pidgin-dev
+pidgin-libnotify
 pidgin-plugin-pack
 pidgin-sipe
 progress
@@ -83,7 +95,9 @@ pyacme
 python3-pip
 python-apt
 python-pygments
+qualys-cloud-agent
 ruby
+ruby-dev
 scala
 screen
 screenkey
@@ -91,6 +105,7 @@ screenruler
 shutter
 sloccount
 smbclient
+sqlite3
 sysstat
 taniumclient
 terminator
@@ -99,8 +114,11 @@ tk-dev
 tmux
 traceroute
 tree
+units
 vim
+virtualbox-6.0
 vlc
+vm-agent-prod
 w3m
 wine-stable
 winetricks
