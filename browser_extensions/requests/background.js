@@ -25,7 +25,7 @@ function changeResponse(details) {
         console.log(str);
         //   str = str.replace(/Example/g, 'WebExtension Example');
         //   filter.write(encoder.encode(str));
-        filter.write(encoder.encode('throw new Error('BLABLA')'));
+        filter.write(encoder.encode('throw new Error("BLABLA")'));
         filter.disconnect();
     }
 
