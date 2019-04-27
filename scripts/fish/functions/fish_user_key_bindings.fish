@@ -8,6 +8,26 @@ bind \cx\cr "history | fzf -m --bind enter:accept | xsel -i -b"
 
 set read_command "read -l result; and commandline -a \$result; commandline -f repaint"
 
+function ffind --description 'Find files and do actions'
+	set -l output (locate -Ai -0 / | fzf --read0 -0 -1 --expect=ctrl-o,ctrl-e,alt-c)
+	set -l key (string join \n $output | head -n1)
+	set -l file (string join \n $output | tail -n1)
+
+	if [ $key = "alt-c" ]
+		if test -d "$file"
+			cd $file
+		else
+			cd (dirname "$file")
+		end
+		commandline -f repaint
+	else if [ $key = "ctrl-o" ]
+		xdg-open "$file"
+	else if [ $key = "ctrl-e" ]
+		vim "$file"
+	end
+end
+bind \cx\ct ffind
+
 # Binds for git refs
 bind \cg\cb "git fshow branch | $read_command"
 bind \cg\cr "git fshow branch -a | $read_command"
