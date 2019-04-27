@@ -28,6 +28,28 @@ function ffind --description 'Find files and do actions'
 end
 bind \cx\ct ffind
 
+function fuzzygrep --description 'Search for file contents'
+	set -l output (ag --nobreak --noheading . | fzf --expect=ctrl-o,ctrl-e,alt-c)
+	set -l key (string join \n $output | head -n1)
+	set -l selected_item (string join \n $output | tail -n1)
+	set -l file (string split ":" -- $selected_item)[1]
+	set -l line (string split ":" -- $selected_item)[2]
+
+	if [ $key = "alt-c" ]
+		if test -d "$file"
+			cd $file
+		else
+			cd (dirname "$file")
+		end
+		commandline -f repaint
+	else if [ $key = "ctrl-o" ]
+		xdg-open "$file"
+	else if [ $key = "ctrl-e" ]
+		vim "$file" +$line
+	end
+end
+bind \cx\cf fuzzygrep
+
 # Binds for git refs
 bind \cg\cb "git fshow branch | $read_command"
 bind \cg\cr "git fshow branch -a | $read_command"
