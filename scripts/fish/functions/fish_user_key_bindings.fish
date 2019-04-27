@@ -50,6 +50,9 @@ function fuzzygrep --description 'Search for file contents'
 end
 bind \cx\cf fuzzygrep
 
+bind \e\j "prevd; commandline -f repaint"
+bind \e\k "nextd; commandline -f repaint"
+
 # Binds for git refs
 bind \cg\cb "git fshow branch | $read_command"
 bind \cg\cr "git fshow branch -a | $read_command"
