@@ -1,1 +1,0 @@
-/home/ANT.AMAZON.COM/guilmelo/.fzf/shell/key-bindings.fish
