@@ -91,16 +91,52 @@ fn main() {
 
     // Slices
 
-    let mut s = String::from("hello world");
+    let s = String::from("hello world");
     let hello = &s[..5];
     let world = &s[6..11];
     println!("slice1: {}, slice2: {}", hello, world);
 
+    let s = String::from("hello world");
+    // let mut s = String::from("hello world");
     let word = first_word(&s);
     // clear causes a mutable borrow conflicting with the immutable one (slice)
     // s.clear();
     println!("First word: {}", word);
     println!("Second word: {}", first_word(&s[6..]));
+
+    let a = [1, 2, 3, 4, 5];
+    let slice = &a[..3];
+    // {:?} uses the Debug trait: https://doc.rust-lang.org/std/fmt/trait.Debug.html
+    println!("Array slice: {:?}", slice);
+
+    let user1 = User {
+        email: String::from("foo@bar.com"),
+        username: String::from("someusername"),
+        active: false,
+        sign_in_count: 10,
+    };
+    println!("My struct: {:?}", user1);
+    println!("Username: {}", user1.username);
+
+    // user1 is immutable
+    // user1.username = String::from("Another name");
+
+    let mut user2 = User {
+        email: String::from("foo@bar.com"),
+        username: String::from("someusername"),
+        active: false,
+        sign_in_count: 10,
+    };
+    user2.username = String::from("Another name");
+    println!("My struct: {:?}", user2);
+}
+
+#[derive(Debug)]
+struct User {
+    username: String,
+    email: String,
+    sign_in_count: u64,
+    active: bool,
 }
 
 fn takes_ownership(some_string: String) {
