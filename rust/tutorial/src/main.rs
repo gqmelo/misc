@@ -129,6 +129,20 @@ fn main() {
     };
     user2.username = String::from("Another name");
     println!("My struct: {:?}", user2);
+
+    let user3 = User {
+        email: String::from("bar@foo.com"),
+        username: String::from("anotherusername"),
+        ..user2
+    };
+    println!("My struct: {:?}", user3);
+
+    let color = Color(0, 0, 0);
+    println!("My color: {:#?}", color);
+
+    let rect1 = Rectangle { width: 10, height: 32};
+    println!("Rectangle: {:?}", rect1);
+    println!("Rectangle area: {}", rect1.area())
 }
 
 #[derive(Debug)]
@@ -137,6 +151,21 @@ struct User {
     email: String,
     sign_in_count: u64,
     active: bool,
+}
+
+#[derive(Debug)]
+struct Color(i32,i32,i32);
+
+#[derive(Debug)]
+struct Rectangle {
+    width: u32,
+    height: u32,
+}
+
+impl Rectangle {
+    fn area(&self) -> u32 {
+        self.width * self.height
+    }
 }
 
 fn takes_ownership(some_string: String) {
