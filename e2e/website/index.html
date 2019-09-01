@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <div id="counter">
+        0
+    </div>
+    <div id="container1" style="position: relative; width: 800px;height: 1000px;background: greenyellow;">
+        <button id="button1" type="button" onclick="clicked()" style="position: absolute;border: 0px;width: 50px;height: 20px;">Click</button>
+    </div>
+    <script>
+        button = document.getElementById('button1');
+        counter = document.getElementById('counter');
+        count = 0;
+        buttonWidth = 50;
+        buttonHeight = 20;
+        buttonLeft = 0;
+        buttonTop = 0;
+        setInterval(move, 10);
+        function move() {
+            buttonLeft += buttonWidth;
+            buttonTop += buttonHeight;
+            if (buttonLeft >= 800) buttonLeft = 0;
+            if (buttonTop >= 1000) buttonTop = 0;
+            button.style.left = buttonLeft + 'px';
+            button.style.top = buttonTop + 'px';
+        }
+        function clicked() {
+            count++;
+            counter.innerHTML = count;
+        }
+    </script>
+</body>
+</html>
