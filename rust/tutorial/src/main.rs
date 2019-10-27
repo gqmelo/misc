@@ -208,7 +208,7 @@ fn main() {
     // println!("100th elem: {}", v2[99]);
     match v1.get(2) {
         Some(third) => println!("Third elem: {}", third),
-        None => println!("No third elem found")
+        None => println!("No third elem found"),
     }
 
     let first_elem = &v1[0];
@@ -238,6 +238,27 @@ fn main() {
         SpreadsheetCell::Float(20.345),
     ];
     println!("Row: {:?}", row);
+
+    // Strings
+    let s1 = String::from("tic");
+    let s2 = String::from("tac");
+    let s3 = String::from("toe");
+
+    let concat_str1 = s1 + &s2 + &s3;
+    // doesn't work, s1 was moved
+    // let concat_str2  = s1 + &s2 + &s3;
+    let concat_str2 = s2 + &s3;
+
+    println!("{}", concat_str1);
+    println!("{}", concat_str2);
+
+    let hello = "Здравствуйте";
+    println!("utf8_length={}", hello.len());
+
+    let hello = "Здравствуйте";
+    println!("slice={}", &hello[0..4]);
+    // This panics as we are not getting the whole char
+    // println!("slice={}", &hello[0..1]);
 }
 
 #[derive(Debug)]
