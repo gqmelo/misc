@@ -5,3 +5,8 @@
 .settings
 .cache
 .hypothesis
+.pytest_cache
+e2e/selenium/report/
+e2e/selenium/screenshots/
+report/
+screenshots/
