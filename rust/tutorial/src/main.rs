@@ -172,6 +172,12 @@ fn main() {
     println!("Message: {:?}", message3);
     println!("Message: {:?}", message4);
 
+    if let Message::Move { x, y } = message2 {
+        println!("Got a Move message: x: {}, y: {}", x, y);
+    } else {
+        println!("Not a Move message");
+    }
+
     let some_number = Some(10);
     let absent_number: Option<u32> = None;
 
@@ -184,6 +190,54 @@ fn main() {
 
     process_optional_number(some_number);
     process_optional_number(absent_number);
+
+    // Modules
+    sound::instrument::clarinet();
+    crate::sound::instrument::clarinet();
+
+    let mut v1: Vec<i32> = Vec::new();
+    v1.push(1);
+    v1.push(110);
+    println!("v={:?}", v1);
+
+    let v2 = vec![4, 32, 1];
+    println!("v={:?}", v2);
+
+    println!("Third elem: {}", v2[2]);
+    // Causes panic
+    // println!("100th elem: {}", v2[99]);
+    match v1.get(2) {
+        Some(third) => println!("Third elem: {}", third),
+        None => println!("No third elem found")
+    }
+
+    let first_elem = &v1[0];
+    // Causes error dur to immutable borrow
+    // v1.push(10);
+    println!("First elem: {}", first_elem);
+
+    for i in &v1 {
+        println!("elem: {}", i);
+    }
+    for i in &mut v1 {
+        *i += 1;
+        println!("elem: {}", i);
+    }
+    println!("v={:?}", v1);
+
+    // Storing different types in an Array
+    #[derive(Debug)]
+    enum SpreadsheetCell {
+        Int(i32),
+        Float(f64),
+        Text(String),
+    }
+    let row = vec![
+        SpreadsheetCell::Int(10),
+        SpreadsheetCell::Text(String::from("Text")),
+        SpreadsheetCell::Float(20.345),
+    ];
+    println!("Row: {:?}", row);
 }
 
 #[derive(Debug)]
@@ -265,4 +319,14 @@ fn first_word(s: &str) -> &str {
     }
 
     &s[..]
+}
+
+mod sound {
+    pub mod instrument {
+        pub fn clarinet() {
+            super::breath_in();
+        }
+    }
+
+    fn breath_in() {}
 }
