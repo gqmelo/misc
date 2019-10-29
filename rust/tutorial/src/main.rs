@@ -259,6 +259,39 @@ fn main() {
     println!("slice={}", &hello[0..4]);
     // This panics as we are not getting the whole char
     // println!("slice={}", &hello[0..1]);
+
+    // Hash maps
+    use std::collections::HashMap;
+
+    let mut scores = HashMap::new();
+    scores.insert(String::from("Blue"), 10);
+    scores.insert(String::from("Yellow"), 50);
+    println!("scores={:#?}", scores);
+
+    // Creating a HashMap from lists using zip
+    let teams = vec![String::from("Blue"), String::from("Yellow")];
+    let initial_scores = vec![10, 50];
+    let mut scores: HashMap<_, _> = teams.iter().zip(initial_scores.iter()).collect();
+    println!("scores={:#?}", scores);
+
+    let team = String::from("Purple");
+    scores.insert(&team, &29);
+    println!("Team name: {}", team);
+    let mut scores = HashMap::new();
+    scores.insert(team, 29);
+    // Can't use team again as it was borrowed by HashMap
+    // println!("Team name: {}", team);
+    println!("Purple: {:#?}", scores.get(&String::from("Purple")));
+    println!("Red: {:#?}", scores.get(&String::from("Red")));
+
+    // Default values
+    scores.entry(String::from("Red")).or_default();
+    scores.entry(String::from("Blue")).or_insert(99);
+    println!("Red: {:#?}", scores.get(&String::from("Red")));
+    println!("Blue: {:#?}", scores.get(&String::from("Blue")));
+    let score = scores.entry(String::from("Green")).or_insert(99);
+    *score += 1;
+    println!("Green: {:#?}", scores.get(&String::from("Green")));
 }
 
 #[derive(Debug)]
