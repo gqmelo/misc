@@ -76,13 +76,13 @@ function fish_prompt --description 'Write out the prompt'
 		set prompt_status ' ' (set_color $fish_color_status) "[$last_status]" "$normal"
 	end
 
-	set -l icon 💻
+	set -l icon ""
 	if string match -q -- "dev-dsk*" $__fish_prompt_hostname
-		set icon 🛰
+		set icon (set_color $fish_color_host)"[REMOTE] "
 	end
 
 	set -g __fish_git_prompt_show_informative_status 1
 	set -g __fish_git_prompt_showcolorhints 1
 
-	echo -n -s (set_color normal) $virtualenv [(date +%X)] ' ' (set_color $fish_color_user) "$icon  " "$USER" $normal @ (set_color $fish_color_host) "$__fish_prompt_hostname" $normal ' ' (set_color $color_cwd) (prompt_pwd) $normal (__fish_vcs_prompt) $normal $prompt_status "> "
+	echo -n -s (set_color normal) $virtualenv [(date +%X)] " $icon" (set_color $fish_color_user) "$USER" $normal @ (set_color $fish_color_host) "$__fish_prompt_hostname" $normal ' ' (set_color $color_cwd) (prompt_pwd) $normal (__fish_vcs_prompt) $normal $prompt_status "> "
 end
