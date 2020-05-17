@@ -1,4 +1,5 @@
 use std::fs::File;
+
 fn main() {
     println!("Hello, world!");
     another_function(5, 6);
@@ -323,6 +324,36 @@ fn main() {
         }
     };
     println!("username: {}", username);
+
+    let username = match read_username_from_file_simplified() {
+        Ok(value) => value,
+        Err(e) => {
+            println!("Could not read username: {:?}", e);
+            String::from("default_user")
+        }
+    };
+    println!("username: {}", username);
+
+    let username = match read_username_from_file_even_more_simplified() {
+        Ok(value) => value,
+        Err(e) => {
+            println!("Could not read username: {:?}", e);
+            String::from("default_user")
+        }
+    };
+    println!("username: {}", username);
+
+    let point = Point { x: 3, y: 5 };
+    // method is defined only for f32 type
+    // point.distance_from_origin();
+    println!("point int: {:?}", point);
+
+    let point = Point { x: 2.0, y: 10.0 };
+    println!(
+        "point float: {:?}; distance from origin: {}",
+        point,
+        point.distance_from_origin()
+    )
 }
 
 #[derive(Debug)]
@@ -433,3 +464,44 @@ fn read_username_from_file() -> Result<String, io::Error> {
         Err(e) => Err(e),
     }
 }
+
+fn read_username_from_file_simplified() -> Result<String, io::Error> {
+    let mut f = File::open("hello.txt")?;
+    let mut s = String::new();
+    f.read_to_string(&mut s)?;
+    Ok(s)
+}
+
+use std::fs;
+fn read_username_from_file_even_more_simplified() -> Result<String, io::Error> {
+    fs::read_to_string("hello.txt")
+}
+
+#[derive(Debug)]
+struct Point<T> {
+    x: T,
+    y: T,
+}
+
+// impl<T> Point<T> {
+//     fn sum(&self) -> T {
+//         self.x + self.y
+//     }
+// }
+
+impl Point<f32> {
+    fn distance_from_origin(&self) -> f32 {
+        (self.x.powi(2) + self.y.powi(2)).sqrt()
+    }
+}
+
+// fn largest<T>(list: &[T]) -> T {
+//     let mut largest = list[0];
+//     for &item in list {
+//         if item > largest {
+//             largest = item;
+//         }
+//     }
+
+//     largest
+// }
