@@ -1,5 +1,8 @@
 use std::fs::File;
 
+mod traits;
+use traits::{NewsArticle, Summary, Tweet};
+
 fn main() {
     println!("Hello, world!");
     another_function(5, 6);
@@ -353,7 +356,26 @@ fn main() {
         "point float: {:?}; distance from origin: {}",
         point,
         point.distance_from_origin()
-    )
+    );
+
+    // ################################################
+    // Traits
+    // ################################################
+    let news = NewsArticle {
+        title: String::from("Some news"),
+        author: String::from("Me"),
+        content: String::from("Some content"),
+    };
+
+    let tweet = Tweet {
+        username: String::from("abc123"),
+        content: String::from("Some tweet"),
+    };
+
+    println!("tweet: {:?}", tweet);
+    println!("tweet summary: {:?}", tweet.summarize());
+    println!("news: {:?}", news);
+    println!("news summary: {:?}", news.summarize());
 }
 
 #[derive(Debug)]
