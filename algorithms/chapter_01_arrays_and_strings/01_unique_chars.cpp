@@ -3,11 +3,11 @@
 
 bool has_unique_chars(const std::string& input) {
     std::set<char> visited;
-    for (std::string::const_iterator it = input.begin(); it != input.end(); it++){
-        if(visited.find(*it) != visited.end()){
+    for (auto& c: input){
+        if(visited.find(c) != visited.end()){
             return false;
         }
-        visited.insert(*it);
+        visited.insert(c);
     }
     return true;
 }
