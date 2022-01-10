@@ -1,0 +1,9 @@
+{
+    "python.pythonPath": "/home/ANT.AMAZON.COM/guilmelo/.virtualenvs/pytest-selenium/bin/python",
+    "python.testing.pytestArgs": [
+        "python"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.nosetestsEnabled": false,
+    "python.testing.pytestEnabled": true
+}
