@@ -122,3 +122,7 @@ source ~/workspace/misc/scripts/bash/bashrc_common
 if [ -f ~/workspace/Guilmelo/scripts/bash/bashrc_work ]; then
   source ~/workspace/Guilmelo/scripts/bash/bashrc_work
 fi
+
+# fnm
+export PATH=/home/ANT.AMAZON.COM/guilmelo/.fnm:$PATH
+eval "`fnm env`"
