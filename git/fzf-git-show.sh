@@ -3,7 +3,7 @@
 fzf_git_show() {
     filter="sed -r ""'""s,^[|\\/* ]+([0-9a-zA-Z]|$),\1,""'"" | cut -d ""'"" ""'"" -f1"
     fzf -0 --reverse --ansi --multi --preview-window=up \
-        --preview="echo {} | $filter | xargs git show --color" \
+        --preview="echo {} | $filter | xargs unbuffer git show --color" \
         --bind "enter:execute(echo -n {+} | xargs copy-git-ref-to-clipboard)+accept" \
     | sed -r 's,^[|\\/* ]+([0-9a-zA-Z]|$),\1,' \
     | cut -d ' ' -f1 | tr '\n' ' '
