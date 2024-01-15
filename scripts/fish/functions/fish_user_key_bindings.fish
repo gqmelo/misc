@@ -1,5 +1,5 @@
 
-set -gx FZF_DEFAULT_OPTS '--bind alt-j:preview-page-down --bind alt-k:preview-page-up --bind ctrl-l:select-all --bind ctrl-n:deselect-all --bind "enter:execute(echo -n {+} | xsel -i -b)+accept"'
+set -gx FZF_DEFAULT_OPTS '--bind alt-n:preview-page-down --bind alt-p:preview-page-up --bind "enter:execute(echo -n {+} | xsel -i -b)+accept"'
 set -gx FZF_CTRL_T_OPTS '--bind "enter:execute(echo -n {+} | xargs copy-path-to-clipboard)+accept"'
 fzf_key_bindings
 
