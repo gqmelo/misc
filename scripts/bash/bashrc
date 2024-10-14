@@ -124,5 +124,8 @@ if [ -f ~/workspace/Guilmelo/scripts/bash/bashrc_work ]; then
 fi
 
 # fnm
-export PATH=/home/ANT.AMAZON.COM/guilmelo/.fnm:$PATH
-eval "`fnm env`"
+FNM_PATH="~/.local/share/fnm"
+if [ -d "$FNM_PATH" ]; then
+  export PATH="$FNM_PATH:$PATH"
+  eval "`fnm env`"
+fi
