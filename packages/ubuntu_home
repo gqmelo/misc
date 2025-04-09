@@ -40,7 +40,6 @@ google-chrome-stable
 gparted
 gpick
 grep
-grub-pc
 gzip
 hostname
 htop
@@ -59,8 +58,6 @@ ibus-table-cangjie3
 ibus-table-cangjie5
 ibus-table-cangjie-big
 iftop
-indicator-cpufreq
-indicator-multiload
 init
 inotify-tools
 input-remapper
@@ -95,17 +92,12 @@ libgl1-mesa-dri
 libgl1-mesa-dri:i386
 libm17n-0
 libmarisa0
-libnvidia-gl-550:i386
 libopencc1.1
 libopencc-data
 libotf1
 libpinyin15
 libpinyin-data
-linux-generic-hwe-24.04
-linux-modules-nvidia-550-generic-hwe-24.04
 lm-sensors
-login
-lvm2
 m17n-db
 meld
 mesa-utils
@@ -117,7 +109,6 @@ ncurses-base
 ncurses-bin
 nethogs
 ngrep
-nvidia-driver-550
 openssh-server
 pdfsam
 peek
@@ -154,9 +145,6 @@ slop
 smbclient
 ssh-askpass
 sshfs
-steam-launcher
-steam-libs-amd64
-steam-libs-i386:i386
 sysstat
 tali
 tiptop
