@@ -1,4 +1,4 @@
-. ~/mambaforge/etc/fish/conf.d/conda.fish
+. ~/miniforge3/etc/fish/conf.d/conda.fish
 
 if not contains ~/.local/bin $PATH
     set -gx PATH ~/.local/bin $PATH
