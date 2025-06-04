@@ -1,19 +1,19 @@
-. ~/miniforge3/etc/fish/conf.d/conda.fish
+. $HOME/miniforge3/etc/fish/conf.d/conda.fish
 
-if not contains ~/.local/bin $PATH
-    set -gx PATH ~/.local/bin $PATH
+if not contains $HOME/.local/bin $PATH
+    set -gx PATH $HOME/.local/bin $PATH
 end
 
-if not contains ~/workspace/misc/bin $PATH
-    set -gx PATH ~/workspace/misc/bin $PATH
+if not contains $HOME/workspace/misc/bin $PATH
+    set -gx PATH $HOME/workspace/misc/bin $PATH
 end
 
-if not contains ~/bin $PATH
-    set -gx PATH ~/bin $PATH
+if not contains $HOME/bin $PATH
+    set -gx PATH $HOME/bin $PATH
 end
 
-if not contains ~/.cargo/bin $PATH
-    set -gx PATH ~/.cargo/bin $PATH
+if not contains $HOME/.cargo/bin $PATH
+    set -gx PATH $HOME/.cargo/bin $PATH
 end
 
 # eval (python3 -m virtualfish)
